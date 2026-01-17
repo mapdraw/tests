@@ -1,0 +1,51 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Test Point",
+        "description": "A test point in Berlin",
+        "marker-color": "#E51B23"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [13.405, 52.52]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Test LineString",
+        "description": "A test linestring from Berlin to Munich",
+        "stroke": "#0066CC"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [13.405, 52.52],
+          [11.582, 48.1351]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Test Polygon",
+        "description": "A test polygon in Bavaria",
+        "stroke": "#3C8C3C"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [11.0, 48.0],
+            [12.0, 48.0],
+            [11.5, 49.0],
+            [11.0, 48.0]
+          ]
+        ]
+      }
+    }
+  ]
+}

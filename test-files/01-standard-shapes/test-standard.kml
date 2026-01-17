@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Style id="placemark-red">
+      <IconStyle>
+        <color>FF231BE5</color>
+      </IconStyle>
+    </Style>
+    <Style id="style-blue">
+      <LineStyle>
+        <color>FFCC6600</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Style id="style-green">
+      <LineStyle>
+        <color>FF3C8C3C</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+    <Placemark>
+      <name>Test Point</name>
+      <description>A test point in Berlin</description>
+      <styleUrl>#placemark-red</styleUrl>
+      <Point>
+        <coordinates>13.4050,52.5200,0</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Test LineString</name>
+      <description>A test linestring from Berlin to Munich</description>
+      <styleUrl>#style-blue</styleUrl>
+      <LineString>
+        <coordinates>
+          13.4050,52.5200,0
+          11.5820,48.1351,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Test Polygon</name>
+      <description>A test polygon in Bavaria</description>
+      <styleUrl>#style-green</styleUrl>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>
+              11.0,48.0,0
+              12.0,48.0,0
+              11.5,49.0,0
+              11.0,48.0,0
+            </coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

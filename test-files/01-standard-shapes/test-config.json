@@ -1,0 +1,10 @@
+{
+  "name": "Standard Shapes",
+  "description": "Tests basic Point, LineString, and Polygon with standard colors",
+  "expectedFeatures": {
+    "Test Point": { "type": "Point", "color": "Red" },
+    "Test LineString": { "type": "LineString", "color": "Blue" },
+    "Test Polygon": { "type": "Polygon", "color": "Green" }
+  },
+  "files": ["test-standard.geojson", "test-standard.gpx", "test-standard.kml", "test-standard.kmz"]
+}

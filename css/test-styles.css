@@ -1,0 +1,555 @@
+/* OpenMapEditor Automated Tests - Styles */
+
+/* Base styles */
+body {
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  max-width: 1400px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #f5f5f5;
+}
+
+h1 {
+  color: #333;
+  border-bottom: 3px solid #4caf50;
+  padding-bottom: 10px;
+}
+
+/* Configuration section */
+.config-section {
+  background: #fff3cd;
+  border: 2px solid #ffc107;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.config-section h2 {
+  margin-top: 0;
+  color: #856404;
+}
+
+.config-section label {
+  display: block;
+  margin: 10px 0 5px 0;
+  font-weight: bold;
+  color: #333;
+}
+
+.config-section input {
+  width: 100%;
+  max-width: 500px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.config-section small {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+}
+
+/* Controls */
+.controls {
+  margin: 20px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+button {
+  background: #6c757d;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 5px;
+  font-size: 16px;
+}
+
+button:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+button.secondary {
+  background: #6c757d;
+}
+
+#status {
+  margin-left: 10px;
+  font-style: italic;
+  color: #666;
+}
+
+/* Test suites container */
+#test-suites {
+  margin: 20px 0;
+}
+
+/* Collapsible test suite sections */
+.test-suite {
+  margin: 15px 0;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+}
+
+.test-suite-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  cursor: pointer;
+  user-select: none;
+}
+
+.test-suite-header h2 {
+  margin: 0;
+  font-size: 18px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.test-suite-header h2::before {
+  content: "\25BC"; /* Down arrow */
+  font-size: 12px;
+  color: #666;
+  transition: transform 0.2s ease;
+}
+
+.test-suite.collapsed .test-suite-header h2::before {
+  transform: rotate(-90deg);
+}
+
+.test-suite-status {
+  font-size: 13px;
+  color: #666;
+  display: flex;
+  gap: 8px;
+}
+
+.test-suite-status .format-icon-pass {
+  color: #4caf50;
+}
+
+.test-suite-status .format-icon-fail {
+  color: #f44336;
+}
+
+.test-suite-status .format-name {
+  color: #333;
+}
+
+.test-suite-status.pending {
+  color: #666;
+}
+
+.test-suite-content {
+  padding: 20px;
+}
+
+.test-suite.collapsed .test-suite-content {
+  display: none;
+}
+
+.test-suite-description {
+  color: #666;
+  margin-bottom: 15px;
+  font-style: italic;
+}
+
+/* Expected features display */
+.expected-features {
+  background: #e3f2fd;
+  border: 1px solid #90caf9;
+  border-radius: 6px;
+  padding: 12px 15px;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+
+.expected-features strong {
+  color: #1565c0;
+}
+
+.expected-feature {
+  display: inline-block;
+  background: white;
+  border: 1px solid #90caf9;
+  border-radius: 4px;
+  padding: 4px 10px;
+  margin: 4px 6px 4px 0;
+  font-size: 13px;
+}
+
+.expected-feature strong {
+  color: #333;
+}
+
+/* Individual format test results */
+.format-test {
+  margin: 15px 0;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  border-left: 4px solid #dee2e6;
+}
+
+.format-test.success {
+  border-left-color: #4caf50;
+}
+
+.format-test.failure {
+  border-left-color: #f44336;
+}
+
+.format-test-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.format-test-header h3 {
+  margin: 0;
+  font-size: 16px;
+  color: #333;
+}
+
+.format-test.success .format-test-header h3::before {
+  content: "\2713 "; /* Checkmark */
+  color: #4caf50;
+}
+
+.format-test.failure .format-test-header h3::before {
+  content: "\2717 "; /* X mark */
+  color: #f44336;
+}
+
+.format-test-status {
+  font-size: 12px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.format-test.success .format-test-status {
+  color: #4caf50;
+}
+
+.format-test.failure .format-test-status {
+  color: #f44336;
+}
+
+/* Side-by-side comparison layout */
+.comparison-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 900px) {
+  .comparison-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.comparison-panel {
+  background: white;
+  border-radius: 8px;
+  padding: 15px;
+  border: 1px solid #dee2e6;
+}
+
+.comparison-panel h4 {
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #dee2e6;
+  font-size: 14px;
+  color: #333;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* Feature list in comparison panels */
+.feature-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.feature-item {
+  padding: 8px 12px;
+  margin: 5px 0;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #333;
+}
+
+.feature-item.valid {
+  border-left: 3px solid #4caf50;
+}
+
+.feature-item.invalid {
+  border-left: 3px solid #f44336;
+}
+
+.feature-item.missing {
+  border-left: 3px solid #ffc107;
+  font-style: italic;
+}
+
+.feature-name {
+  font-weight: 500;
+  color: #333;
+  min-width: 140px;
+}
+
+.feature-details {
+  color: #666;
+  font-size: 12px;
+  text-align: left;
+}
+
+.feature-status {
+  font-size: 14px;
+  font-weight: bold;
+  margin-left: auto;
+}
+
+.feature-item.valid .feature-status::before {
+  content: "\2713";
+  color: #4caf50;
+}
+
+.feature-item.invalid .feature-status::before {
+  content: "\2717";
+  color: #f44336;
+}
+
+.feature-item.missing .feature-status::before {
+  content: "?";
+  color: #ffc107;
+}
+
+/* Issues list */
+.issues-list {
+  background: #fff3cd;
+  border: 1px solid #ffc107;
+  border-radius: 4px;
+  padding: 10px 15px;
+  margin-top: 15px;
+}
+
+.issues-list h5 {
+  margin: 0 0 10px 0;
+  color: #856404;
+  font-size: 13px;
+}
+
+.issues-list ul {
+  margin: 0;
+  padding-left: 20px;
+}
+
+.issues-list li {
+  color: #856404;
+  font-size: 13px;
+  margin: 5px 0;
+}
+
+/* JSON output toggle */
+.json-toggle {
+  margin-top: 15px;
+}
+
+.json-toggle-btn {
+  background: #6c757d;
+  padding: 6px 12px;
+  font-size: 12px;
+}
+
+.json-toggle-btn:hover {
+  background: #5a6268;
+}
+
+.json-content {
+  display: none;
+  margin-top: 10px;
+}
+
+.json-content.visible {
+  display: block;
+}
+
+.json-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 15px;
+}
+
+@media (max-width: 900px) {
+  .json-columns {
+    grid-template-columns: 1fr;
+  }
+}
+
+.json-column h5 {
+  margin: 0 0 8px 0;
+  font-size: 12px;
+  color: #666;
+  text-transform: uppercase;
+}
+
+pre {
+  background: #f5f5f5;
+  padding: 15px;
+  border-radius: 4px;
+  overflow-x: auto;
+  font-size: 11px;
+  border: 1px solid #ddd;
+  max-height: 300px;
+  margin: 0;
+}
+
+/* Suite summary (inside test suite) */
+.suite-summary {
+  margin-bottom: 20px;
+  padding: 15px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border-left: 4px solid #dee2e6;
+  font-size: 15px;
+}
+
+.suite-summary.all-pass {
+  border-left-color: #4caf50;
+}
+
+.suite-summary.has-failures {
+  border-left-color: #f44336;
+}
+
+/* Global summary section (legacy) */
+.summary {
+  margin: 20px 0;
+  padding: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+}
+
+.summary.all-pass {
+  border-left: 5px solid #4caf50;
+}
+
+.summary.has-failures {
+  border-left: 5px solid #f44336;
+}
+
+/* Legacy test-result styles (for backwards compatibility) */
+#results {
+  margin: 20px 0;
+}
+
+.test-result {
+  margin: 10px 0;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.test-result.success {
+  border-left: 5px solid #4caf50;
+}
+
+.test-result.failure {
+  border-left: 5px solid #f44336;
+}
+
+.test-result h3 {
+  margin: 0 0 10px 0;
+  color: #333;
+}
+
+.test-result.success h3::before {
+  content: "\2713 ";
+  color: #4caf50;
+}
+
+.test-result.failure h3::before {
+  content: "\2717 ";
+  color: #f44336;
+}
+
+/* Hidden map element */
+#map {
+  display: none;
+}
+
+/* Loading overlay */
+.loading-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+
+.loading-overlay.active {
+  display: flex;
+}
+
+.loading-content {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  text-align: center;
+}
+
+/* Error display */
+.error-box {
+  background: #f8d7da;
+  border: 1px solid #f44336;
+  border-radius: 8px;
+  padding: 15px;
+  margin: 20px 0;
+  color: #721c24;
+}
+
+/* Arrow indicator for export flow */
+.export-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+  font-size: 24px;
+}
+
+@media (max-width: 900px) {
+  .export-arrow {
+    transform: rotate(90deg);
+    margin: 10px 0;
+  }
+}

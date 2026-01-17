@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>OpenMapEditor - Automated Tests</title>
+    <link rel="stylesheet" href="./css/test-styles.css" />
+  </head>
+  <body>
+    <h1>OpenMapEditor - Automated Tests</h1>
+
+    <div class="config-section">
+      <h2>Configuration</h2>
+      <label for="base-url">OpenMapEditor Server URL:</label>
+      <input
+        type="text"
+        id="base-url"
+        value="http://localhost:5500"
+        placeholder="http://localhost:5500"
+      />
+      <small>
+        The test runner will load dependencies from this server. See README.md in this directory for
+        setup instructions.
+      </small>
+    </div>
+
+    <div class="controls">
+      <button id="run-all-btn">Run All Tests</button>
+      <button class="secondary" id="copy-btn" style="display: none">Copy Results</button>
+      <span id="status">Ready</span>
+    </div>
+
+    <div id="error-container"></div>
+    <div id="test-suites"></div>
+    <div id="map"></div>
+
+    <div class="loading-overlay" id="loading-overlay">
+      <div class="loading-content">
+        <h2>Loading dependencies...</h2>
+        <p id="loading-status">Please wait</p>
+      </div>
+    </div>
+
+    <!-- Test framework modules -->
+    <script src="./js/export-capture.js"></script>
+    <script src="./js/test-validators.js"></script>
+    <script src="./js/test-ui.js"></script>
+    <script src="./js/test-runner.js"></script>
+  </body>
+</html>
