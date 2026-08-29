@@ -1,10 +1,10 @@
 {
   "name": "Standard Shapes",
-  "description": "Tests basic Point, LineString, and Polygon with standard colors",
+  "description": "MapDraw exports of a marker, a path (with elevation) and an area, each in a distinct non-default color",
   "expectedFeatures": {
-    "Test Point": { "type": "Point", "color": "Red" },
-    "Test LineString": { "type": "LineString", "color": "Blue" },
-    "Test Polygon": { "type": "Polygon", "color": "Green" }
+    "Marker": { "type": "Point", "color": "#36DB14" },
+    "Path": { "type": "LineString", "color": "#AC3939" },
+    "Area": { "type": "Polygon", "color": "#8FA2FF" }
   },
   "files": ["test-standard.geojson", "test-standard.gpx", "test-standard.kml", "test-standard.kmz"]
 }

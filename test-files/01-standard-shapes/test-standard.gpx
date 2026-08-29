@@ -1,34 +1,41 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<gpx version="1.1" creator="OpenMapEditor Test" xmlns="http://www.topografix.com/GPX/1/1" xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2">
-  <wpt lat="52.5200" lon="13.4050">
-    <name>Test Point</name>
-    <desc>A test point in Berlin</desc>
+<gpx version="1.1" creator="MapDraw.net" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+    xmlns:app="https://www.mapdraw.net">
+  <wpt lat="46.61171462536894" lon="9.003295898437502">
+    <name>Marker</name>
     <extensions>
-      <gpx_style:color>E51B23</gpx_style:color>
+      <app:color>#FF36DB14</app:color>
     </extensions>
   </wpt>
   <trk>
-    <name>Test LineString</name>
-    <desc>A test linestring from Berlin to Munich</desc>
+    <name>Path</name>
     <extensions>
-      <gpx_style:color>0066CC</gpx_style:color>
+      <gpx_style:line>
+        <gpx_style:color>AC3939</gpx_style:color>
+      </gpx_style:line>
     </extensions>
     <trkseg>
-      <trkpt lat="52.5200" lon="13.4050"/>
-      <trkpt lat="48.1351" lon="11.5820"/>
+      <trkpt lat="47.409502941311054" lon="7.547607421875001"><ele>396.3949890136719</ele></trkpt>
+      <trkpt lat="47.36115300722623" lon="9.113159179687502"><ele>821.8002311582871</ele></trkpt>
+      <trkpt lat="47.230759648346925" lon="8.129882812500002"><ele>732.4886484004027</ele></trkpt>
+      <trkpt lat="47.06263847995432" lon="8.959350585937502"><ele>1550.376342773438</ele></trkpt>
     </trkseg>
   </trk>
   <trk>
-    <name>Test Polygon</name>
-    <desc>A test polygon in Bavaria</desc>
+    <name>Area</name>
     <extensions>
-      <gpx_style:color>3C8C3C</gpx_style:color>
+      <gpx_style:line>
+        <gpx_style:color>8FA2FF</gpx_style:color>
+      </gpx_style:line>
     </extensions>
     <trkseg>
-      <trkpt lat="48.0" lon="11.0"/>
-      <trkpt lat="48.0" lon="12.0"/>
-      <trkpt lat="49.0" lon="11.5"/>
-      <trkpt lat="48.0" lon="11.0"/>
+      <trkpt lat="47.18971246448421" lon="7.316894531250001"></trkpt>
+      <trkpt lat="46.57774276255591" lon="6.882934570312501"></trkpt>
+      <trkpt lat="46.10370875598026" lon="7.745361328125001"></trkpt>
+      <trkpt lat="46.74738913515841" lon="8.421020507812502"></trkpt>
+      <trkpt lat="46.73986059969267" lon="7.575073242187501"></trkpt>
+      <trkpt lat="47.18971246448421" lon="7.316894531250001"></trkpt>
     </trkseg>
   </trk>
 </gpx>

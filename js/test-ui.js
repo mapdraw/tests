@@ -295,95 +295,6 @@ function createJsonToggle(importedFeatures, exportedGeoJson) {
 }
 
 /**
- * Creates a summary element for a single test suite.
- *
- * @param {Object} suiteResult - Single test suite result
- * @returns {HTMLElement} The summary element
- */
-function createSuiteSummaryElement(suiteResult) {
-  const formatResults = suiteResult.formatResults;
-  const totalPassed = formatResults.filter((r) => r.passed).length;
-  const totalTests = formatResults.length;
-
-  // Build format breakdown
-  const formatBreakdown = formatResults
-    .map((fr) => {
-      const icon = fr.passed ? "&#10003;" : "&#10007;";
-      const color = fr.passed ? "#4caf50" : "#f44336";
-      return `<span style="color: ${color}">${icon}</span> ${fr.format}`;
-    })
-    .join(" &nbsp;&nbsp; ");
-
-  const summary = document.createElement("div");
-  summary.className = `suite-summary ${totalPassed === totalTests ? "all-pass" : "has-failures"}`;
-  summary.innerHTML = `
-    <div style="margin-bottom: 8px;">
-      <strong>Test Summary:</strong> ${totalPassed}/${totalTests} tests passed
-    </div>
-    <div style="font-size: 13px; color: #666; margin-bottom: 8px;">
-      Import each format, then export to GeoJSON. Validate that features (name, type, color) are preserved.
-    </div>
-    <div style="font-size: 14px;">
-      <strong>Formats:</strong> ${formatBreakdown}
-    </div>
-  `;
-
-  return summary;
-}
-
-/**
- * Displays a global summary of all test results (legacy, kept for text export).
- *
- * @param {Object[]} allResults - Array of all test suite results
- * @returns {HTMLElement} The summary element
- */
-function createSummaryElement(allResults) {
-  let totalPassed = 0;
-  let totalTests = 0;
-  const formatStats = {};
-
-  allResults.forEach((suiteResult) => {
-    suiteResult.formatResults.forEach((fr) => {
-      totalTests++;
-      if (fr.passed) totalPassed++;
-
-      // Track per-format stats
-      if (!formatStats[fr.format]) {
-        formatStats[fr.format] = { passed: 0, total: 0 };
-      }
-      formatStats[fr.format].total++;
-      if (fr.passed) formatStats[fr.format].passed++;
-    });
-  });
-
-  // Build format breakdown
-  const formatBreakdown = Object.entries(formatStats)
-    .map(([format, stats]) => {
-      const icon = stats.passed === stats.total ? "&#10003;" : "&#10007;";
-      const color = stats.passed === stats.total ? "#4caf50" : "#f44336";
-      return `<span style="color: ${color}">${icon}</span> ${format}`;
-    })
-    .join(" &nbsp;&nbsp; ");
-
-  const summary = document.createElement("div");
-  summary.className = `summary ${totalPassed === totalTests ? "all-pass" : "has-failures"}`;
-  summary.innerHTML = `
-    <div style="margin-bottom: 10px;">
-      <strong>Test Summary:</strong> ${totalPassed}/${totalTests} tests passed
-    </div>
-    <div style="font-size: 14px; color: #666; margin-bottom: 10px;">
-      <strong>What we test:</strong> Import each file format, then export to GeoJSON.
-      Validate that features (name, type, color) are preserved through the round-trip.
-    </div>
-    <div style="font-size: 14px;">
-      <strong>Formats:</strong> ${formatBreakdown}
-    </div>
-  `;
-
-  return summary;
-}
-
-/**
  * Shows an error message in the UI.
  *
  * @param {string} message - Error message to display
@@ -490,13 +401,8 @@ function formatResultsAsText(allResults) {
 if (typeof window !== "undefined") {
   window.TestUI = {
     createTestSuiteElement,
-    toggleSuiteCollapse,
     updateSuiteStatus,
     createFormatTestElement,
-    createComparisonPanel,
-    createJsonToggle,
-    createSuiteSummaryElement,
-    createSummaryElement,
     showError,
     clearError,
     updateStatus,

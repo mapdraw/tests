@@ -4,46 +4,84 @@
     {
       "type": "Feature",
       "properties": {
-        "name": "Test Point",
-        "description": "A test point in Berlin",
-        "marker-color": "#E51B23"
-      },
-      "geometry": {
-        "type": "Point",
-        "coordinates": [13.405, 52.52]
-      }
-    },
-    {
-      "type": "Feature",
-      "properties": {
-        "name": "Test LineString",
-        "description": "A test linestring from Berlin to Munich",
-        "stroke": "#0066CC"
+        "stroke": "#AC3939",
+        "name": "Path"
       },
       "geometry": {
         "type": "LineString",
         "coordinates": [
-          [13.405, 52.52],
-          [11.582, 48.1351]
+          [
+            7.547607421875001,
+            47.409502941311054,
+            396.3949890136719
+          ],
+          [
+            9.113159179687502,
+            47.36115300722623,
+            821.8002311582871
+          ],
+          [
+            8.129882812500002,
+            47.230759648346925,
+            732.4886484004027
+          ],
+          [
+            8.959350585937502,
+            47.06263847995432,
+            1550.376342773438
+          ]
         ]
       }
     },
     {
       "type": "Feature",
       "properties": {
-        "name": "Test Polygon",
-        "description": "A test polygon in Bavaria",
-        "stroke": "#3C8C3C"
+        "stroke": "#8FA2FF",
+        "name": "Area"
       },
       "geometry": {
         "type": "Polygon",
         "coordinates": [
           [
-            [11.0, 48.0],
-            [12.0, 48.0],
-            [11.5, 49.0],
-            [11.0, 48.0]
+            [
+              7.316894531250001,
+              47.18971246448421
+            ],
+            [
+              6.882934570312501,
+              46.57774276255591
+            ],
+            [
+              7.745361328125001,
+              46.10370875598026
+            ],
+            [
+              8.421020507812502,
+              46.74738913515841
+            ],
+            [
+              7.575073242187501,
+              46.73986059969267
+            ],
+            [
+              7.316894531250001,
+              47.18971246448421
+            ]
           ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "marker-color": "#36DB14",
+        "name": "Marker"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.003295898437502,
+          46.61171462536894
         ]
       }
     }

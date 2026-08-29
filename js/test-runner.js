@@ -23,7 +23,11 @@ async function discoverTestSuites() {
 
   for (const suiteName of knownSuites) {
     try {
-      const response = await fetch(`./test-files/${suiteName}/test-config.json`);
+      // no-store: config and fixtures are edited between runs, and a cached copy
+      // silently tests the previous version.
+      const response = await fetch(`./test-files/${suiteName}/test-config.json`, {
+        cache: "no-store",
+      });
       if (response.ok) {
         const config = await response.json();
         config.path = suiteName;
@@ -66,7 +70,7 @@ function loadStylesheet(url) {
 }
 
 /**
- * Loads all dependencies from the OpenMapEditor server.
+ * Loads all dependencies from the MapDraw server.
  *
  * @returns {Promise<boolean>} True if dependencies loaded successfully
  */
@@ -83,7 +87,7 @@ async function loadDependencies() {
     loadingStatus.textContent = "Loading stylesheets...";
     loadStylesheet(`${baseUrl}/leaflet-1.9.4/leaflet.css`);
     loadStylesheet(`${baseUrl}/leaflet-draw-1.0.4/leaflet.draw.css`);
-    loadStylesheet(`${baseUrl}/sweetalert2-11.26.17/sweetalert2.min.css`);
+    loadStylesheet(`${baseUrl}/sweetalert2-11.26.25/sweetalert2.min.css`);
 
     // Load scripts in order
     const scripts = [
@@ -95,7 +99,7 @@ async function loadDependencies() {
         name: "Leaflet Draw",
       },
       {
-        url: `${baseUrl}/sweetalert2-11.26.17/sweetalert2.all.min.js`,
+        url: `${baseUrl}/sweetalert2-11.26.25/sweetalert2.all.min.js`,
         name: "SweetAlert2",
       },
       { url: `${baseUrl}/togeojson-0.16.2/togeojson.js`, name: "toGeoJSON" },
@@ -105,6 +109,7 @@ async function loadDependencies() {
         name: "SweetAlert2 Config",
       },
       { url: `${baseUrl}/js/utils.js`, name: "Utils" },
+      { url: `${baseUrl}/js/color-utils.js`, name: "Color Utils" },
       { url: `${baseUrl}/js/map-interactions.js`, name: "Map Interactions" },
       { url: `${baseUrl}/js/ui-handlers.js`, name: "UI Handlers" },
       { url: `${baseUrl}/js/file-handlers.js`, name: "File Handlers" },
@@ -141,7 +146,7 @@ async function loadDependencies() {
   } catch (error) {
     loadingOverlay.classList.remove("active");
     TestUI.showError(
-      `Failed to load dependencies: ${error.message}<br><br>Make sure the OpenMapEditor server URL is correct and the server is running.`,
+      `Failed to load dependencies: ${error.message}<br><br>Make sure the MapDraw server URL is correct and the server is running.`,
     );
     throw error;
   }
@@ -157,10 +162,20 @@ async function loadDependencies() {
  */
 async function loadAndImportFile(suitePath, filename, importFunction) {
   // Load test file
-  const response = await fetch(`./test-files/${suitePath}/${filename}`);
+  const response = await fetch(`./test-files/${suitePath}/${filename}`, { cache: "no-store" });
   const blob = await response.blob();
-  const file = new File([blob], filename);
+  return importFile(new File([blob], filename), importFunction);
+}
 
+/**
+ * Imports a File through one of the app's import functions and waits for the
+ * resulting layers to land in importedItems.
+ *
+ * @param {File} file - The file to import
+ * @param {Function} importFunction - The import function to use
+ * @returns {Promise<Object>} Import result with features and layers
+ */
+function importFile(file, importFunction) {
   return new Promise((resolve) => {
     // Clear previous imports
     window.importedItems.clearLayers();
@@ -264,21 +279,50 @@ async function runFormatTest(suiteConfig, filename) {
       { allowGpxPolygonAsLineString: isGpx },
     );
 
-    // Step 3: Export to GeoJSON (capture without download)
-    const exportedGeoJson = ExportCapture.captureGeoJsonExport(importResult.layers);
+    // Step 3: Export to every format the app can write. All exports run before
+    // any re-import below, because re-importing replaces the imported layers.
+    const exportedContent = {};
+    for (const exportFormat of ExportCapture.FORMATS) {
+      exportedContent[exportFormat] = ExportCapture.captureExport(exportFormat);
+    }
 
-    // Step 4: Extract features from exported GeoJSON
-    const exportedFeatures = ExportCapture.extractFeaturesFromGeoJson(exportedGeoJson);
+    // Step 4: Round-trip each export back through the app's own importer, so
+    // exported geometry and colors are read by the same code a user's re-import
+    // would use, rather than by a parser maintained only inside these tests.
+    const exportValidations = {};
+    let exportedFeatures = [];
 
-    // Step 5: Validate exported features against expected
-    // Note: If source was GPX, polygons were imported as LineStrings and will export as such
-    const exportValidation = TestValidators.validateFeatures(
-      exportedFeatures,
-      suiteConfig.expectedFeatures,
-      { allowGpxPolygonAsLineString: isGpx },
-    );
+    for (const exportFormat of ExportCapture.FORMATS) {
+      const exportFilename = `export.${ExportCapture.EXPORT_EXTENSIONS[exportFormat]}`;
+      const reimported = await importFile(
+        new File([exportedContent[exportFormat]], exportFilename),
+        getImportFunction(exportFilename),
+      );
 
-    // Overall pass: both import and export must pass
+      // GPX has no polygon type, so a polygon comes back as a closed LineString
+      // whether it lost the type on the way in or on the way out.
+      exportValidations[exportFormat] = TestValidators.validateFeatures(
+        reimported.features,
+        suiteConfig.expectedFeatures,
+        { allowGpxPolygonAsLineString: isGpx || exportFormat === "GPX" },
+      );
+
+      if (exportFormat === "GeoJSON") {
+        exportedFeatures = reimported.features;
+      }
+    }
+
+    // Step 5: Merge the per-format results into the single exportResult the UI
+    // renders. Issues are prefixed so a failure names the format that broke.
+    const exportValidation = {
+      passed: Object.values(exportValidations).every((v) => v.passed),
+      issues: Object.entries(exportValidations).flatMap(([fmt, v]) =>
+        v.issues.map((issue) => `${fmt}: ${issue}`),
+      ),
+      featureResults: exportValidations.GeoJSON.featureResults,
+    };
+
+    // Overall pass: import and every export format must pass
     const passed = importValidation.passed && exportValidation.passed;
 
     return {
@@ -289,7 +333,8 @@ async function runFormatTest(suiteConfig, filename) {
       exportResult: exportValidation,
       importedFeatures: importResult.features,
       exportedFeatures: exportedFeatures,
-      exportedGeoJson: exportedGeoJson,
+      exportedGeoJson: exportedContent.GeoJSON,
+      exportValidations: exportValidations,
     };
   } catch (error) {
     console.error(`Error testing ${formatName}:`, error);

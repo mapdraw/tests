@@ -6,17 +6,40 @@
  */
 
 /**
+ * Names a hex color using MapDraw's own CSS_COLOR_NAMES table, so a result reads
+ * as "Crimson" rather than "#DC143C". Most colors have no CSS name and are shown
+ * as their hex. Display only - comparisons use hex, because several names can
+ * share one hex (aqua/cyan, gray/grey).
+ *
+ * @param {string} hex - Normalized uppercase hex color, as parseColor() returns
+ * @returns {string} Capitalized CSS color name, or the hex if it has no name
+ */
+function hexToColorName(hex) {
+  if (!hex) return "(none)";
+  const name = Object.keys(CSS_COLOR_NAMES).find((key) => CSS_COLOR_NAMES[key] === hex);
+  return name ? name.charAt(0).toUpperCase() + name.slice(1) : hex;
+}
+
+/**
  * Extracts standardized feature data from a Leaflet layer.
  *
  * @param {L.Layer} layer - The Leaflet layer to extract data from
  * @returns {Object} Extracted feature data
  */
 function extractFeatureData(layer) {
+  // MapDraw keeps color in feature.properties.stroke (paths) or "marker-color"
+  // (markers); getLayerColor() is the app's own accessor for that. It returns the
+  // stored value verbatim, so normalize it - a file may store "#ac3939" lowercase,
+  // or a CSS name, and everything below compares hex.
+  const rawColor = getLayerColor(layer);
+  const color = parseColor(rawColor) || rawColor;
+
   const data = {
     type: layer.feature?.geometry?.type || null,
     name: layer.feature?.properties?.name || "(unnamed)",
     description: layer.feature?.properties?.description || "",
-    colorName: layer.feature?.properties?.colorName || "Red",
+    color: color,
+    colorName: hexToColorName(color),
     pathType: layer.pathType || null,
     coordinates: null,
   };
@@ -50,20 +73,6 @@ function extractFeatureData(layer) {
   }
 
   return data;
-}
-
-/**
- * Extracts features from all layers in a feature group.
- *
- * @param {L.FeatureGroup} featureGroup - The feature group containing layers
- * @returns {Object[]} Array of extracted feature data
- */
-function extractFeaturesFromLayers(featureGroup) {
-  const features = [];
-  featureGroup.eachLayer((layer) => {
-    features.push(extractFeatureData(layer));
-  });
-  return features;
 }
 
 /**
@@ -124,8 +133,10 @@ function validateFeatures(features, expected, options = {}) {
       result.passed = false;
     }
 
-    // Check color
-    if (feature.colorName === expectedFeature.color) {
+    // Check color. The expected value goes through the app's parseColor() too, so
+    // test-config may state either a hex ("#AC3939") or a CSS name ("crimson").
+    const expectedColor = parseColor(expectedFeature.color);
+    if (expectedColor && parseColor(feature.color) === expectedColor) {
       featureResult.colorMatch = true;
     } else {
       featureResult.issues.push(
@@ -165,125 +176,10 @@ function validateFeatures(features, expected, options = {}) {
   return result;
 }
 
-/**
- * Compares imported features with exported features.
- *
- * @param {Object[]} importedFeatures - Features extracted from import
- * @param {Object[]} exportedFeatures - Features extracted from export
- * @returns {Object} Comparison result with differences
- */
-function compareImportExport(importedFeatures, exportedFeatures) {
-  const result = {
-    match: true,
-    differences: [],
-  };
-
-  // Create lookup by name
-  const importedByName = {};
-  importedFeatures.forEach((f) => {
-    importedByName[f.name] = f;
-  });
-
-  const exportedByName = {};
-  exportedFeatures.forEach((f) => {
-    exportedByName[f.name] = f;
-  });
-
-  // Check each imported feature has matching export
-  Object.keys(importedByName).forEach((name) => {
-    const imported = importedByName[name];
-    const exported = exportedByName[name];
-
-    if (!exported) {
-      result.match = false;
-      result.differences.push({
-        feature: name,
-        issue: "Missing from export",
-      });
-      return;
-    }
-
-    // Compare type
-    if (imported.type !== exported.type) {
-      result.match = false;
-      result.differences.push({
-        feature: name,
-        issue: `Type changed: ${imported.type} -> ${exported.type}`,
-      });
-    }
-
-    // Compare color
-    if (imported.colorName !== exported.colorName) {
-      result.match = false;
-      result.differences.push({
-        feature: name,
-        issue: `Color changed: ${imported.colorName} -> ${exported.colorName}`,
-      });
-    }
-  });
-
-  // Check for extra features in export
-  Object.keys(exportedByName).forEach((name) => {
-    if (!importedByName[name]) {
-      result.match = false;
-      result.differences.push({
-        feature: name,
-        issue: "Extra feature in export",
-      });
-    }
-  });
-
-  return result;
-}
-
-/**
- * Creates a feature summary for display.
- *
- * @param {Object} feature - Extracted feature data
- * @returns {string} Human-readable summary
- */
-function formatFeatureSummary(feature) {
-  const typeShort = {
-    Point: "Point",
-    LineString: "Line",
-    Polygon: "Poly",
-  };
-  return `${feature.name} (${typeShort[feature.type] || feature.type}, ${feature.colorName})`;
-}
-
-/**
- * Validates that exported GeoJSON matches expected structure.
- *
- * @param {Object} geojson - The exported GeoJSON
- * @param {Object} expected - Expected features
- * @returns {Object} Validation result
- */
-function validateExportedGeoJson(geojson, expected) {
-  if (!geojson || geojson.type !== "FeatureCollection") {
-    return {
-      passed: false,
-      issues: ["Invalid GeoJSON: not a FeatureCollection"],
-      featureResults: {},
-    };
-  }
-
-  const features = geojson.features.map((f) => ({
-    type: f.geometry.type,
-    name: f.properties.name || "(unnamed)",
-    colorName: f.properties.colorName || "Red",
-  }));
-
-  return validateFeatures(features, expected);
-}
-
 // Export for module use
 if (typeof window !== "undefined") {
   window.TestValidators = {
     extractFeatureData,
-    extractFeaturesFromLayers,
     validateFeatures,
-    compareImportExport,
-    formatFeatureSummary,
-    validateExportedGeoJson,
   };
 }
