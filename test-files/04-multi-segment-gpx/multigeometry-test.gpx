@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Test File"
+     xmlns="http://www.topografix.com/GPX/1/1"
+     xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+     xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+     xsi:schemaLocation="http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd http://www.topografix.com/GPX/gpx_style/0/2 https://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 https://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd">
+
+  <metadata>
+    <name>MultiGeometry Test (GPX subset)</name>
+    <desc>Tests MultiLineString (multi-segment tracks). Multi-segment tracks are automatically exploded into separate LineString features on import.</desc>
+  </metadata>
+
+  <!-- Multi-segment track = MultiLineString (Blue #0066CC) -->
+  <trk>
+    <name>Multi-segment trail</name>
+    <desc>MultiLineString with 3 disconnected segments</desc>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>0066CC</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
+
+    <trkseg>
+      <trkpt lat="45.0000" lon="9.0000">
+        <ele>100</ele>
+      </trkpt>
+      <trkpt lat="45.0010" lon="9.0010">
+        <ele>105</ele>
+      </trkpt>
+      <trkpt lat="45.0020" lon="9.0020">
+        <ele>110</ele>
+      </trkpt>
+    </trkseg>
+
+    <trkseg>
+      <trkpt lat="45.0100" lon="9.0100">
+        <ele>150</ele>
+      </trkpt>
+      <trkpt lat="45.0110" lon="9.0110">
+        <ele>155</ele>
+      </trkpt>
+      <trkpt lat="45.0120" lon="9.0120">
+        <ele>160</ele>
+      </trkpt>
+    </trkseg>
+
+    <trkseg>
+      <trkpt lat="45.0200" lon="9.0200">
+        <ele>200</ele>
+      </trkpt>
+      <trkpt lat="45.0210" lon="9.0210">
+        <ele>205</ele>
+      </trkpt>
+      <trkpt lat="45.0220" lon="9.0220">
+        <ele>210</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+
+  <!-- Multiple waypoints simulating MultiPoint (Red #E51B23) -->
+  <!-- Note: GPX waypoints don't support colors, but we document the intended color -->
+  <wpt lat="45.0300" lon="9.0300">
+    <ele>120</ele>
+    <name>Waypoint cluster (point 1)</name>
+    <desc>MultiPoint with 3 related points (Red)</desc>
+  </wpt>
+  <wpt lat="45.0310" lon="9.0310">
+    <ele>125</ele>
+    <name>Waypoint cluster (point 2)</name>
+    <desc>MultiPoint with 3 related points (Red)</desc>
+  </wpt>
+  <wpt lat="45.0320" lon="9.0320">
+    <ele>130</ele>
+    <name>Waypoint cluster (point 3)</name>
+    <desc>MultiPoint with 3 related points (Red)</desc>
+  </wpt>
+
+  <!-- Normal single-segment track = LineString (Purple #9B24B2) -->
+  <trk>
+    <name>Normal trail</name>
+    <desc>Regular LineString for comparison</desc>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>9B24B2</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
+
+    <trkseg>
+      <trkpt lat="46.0000" lon="10.0000">
+        <ele>300</ele>
+      </trkpt>
+      <trkpt lat="46.0010" lon="10.0010">
+        <ele>305</ele>
+      </trkpt>
+      <trkpt lat="46.0020" lon="10.0020">
+        <ele>310</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+
+</gpx>

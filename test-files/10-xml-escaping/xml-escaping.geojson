@@ -1,0 +1,71 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Tom & Jerry <\"Café\"> 'quoted'",
+        "description": "Line 1\nLine 2: a < b && c > d — Zürich 🗺️",
+        "marker-color": "#FF8C00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.54,
+          47.37
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Route <A> & B",
+        "description": "\"double\" & 'single'",
+        "stroke": "#4169E1"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.5,
+            47.35
+          ],
+          [
+            8.6,
+            47.36
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Area & <Co>",
+        "stroke": "#228B22"
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              8.5,
+              47.3
+            ],
+            [
+              8.6,
+              47.3
+            ],
+            [
+              8.6,
+              47.32
+            ],
+            [
+              8.5,
+              47.3
+            ]
+          ]
+        ]
+      }
+    }
+  ]
+}

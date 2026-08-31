@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>xml-escaping</name>
+  <Folder>
+    <name>Imported Features</name>
+    <Placemark>
+      <name>Tom &amp; Jerry &lt;&quot;Café&quot;&gt; &apos;quoted&apos;</name>
+      <description>Line 1
+Line 2: a &lt; b &amp;&amp; c &gt; d — Zürich 🗺️</description>
+      <Style>
+        <IconStyle>
+          <color>FF008CFF</color>
+          <Icon>
+            <href>https://maps.google.com/mapfiles/kml/pushpin/wht-pushpin.png</href>
+          </Icon>
+        </IconStyle>
+      </Style>
+      <Point><coordinates>8.54,47.37,0</coordinates></Point>
+    </Placemark>
+    <Placemark>
+      <name>Route &lt;A&gt; &amp; B</name>
+      <description>&quot;double&quot; &amp; &apos;single&apos;</description>
+      <Style>
+        <LineStyle>
+          <color>FFE16941</color>
+          <width>5</width>
+        </LineStyle>
+      </Style>
+      <LineString><coordinates>8.5,47.35,0 8.6,47.36,0</coordinates></LineString>
+    </Placemark>
+    <Placemark>
+      <name>Area &amp; &lt;Co&gt;</name>
+      <Style>
+        <LineStyle>
+          <color>FF228B22</color>
+          <width>5</width>
+        </LineStyle>
+      </Style>
+      <Polygon><outerBoundaryIs><LinearRing><coordinates>8.5,47.3,0 8.6,47.3,0 8.6,47.32,0 8.5,47.3,0</coordinates></LinearRing></outerBoundaryIs></Polygon>
+    </Placemark>
+  </Folder>
+</Document>
+</kml>

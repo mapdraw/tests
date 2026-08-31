@@ -1,0 +1,79 @@
+{
+  "name": "Nested GeoJSON Geometries",
+  "description": "A polygon with a hole becomes one area per ring, a GeometryCollection holding a MultiLineString is exploded recursively, and an unnamed MultiPoint yields markers with the default name",
+  "expectedFeatures": [
+    {
+      "name": "Donut area (outer ring + hole) (Area)",
+      "type": "Polygon",
+      "color": "#0066CC",
+      "coordinates": [
+        [
+          [8.51, 47.36],
+          [8.56, 47.36],
+          [8.56, 47.39],
+          [8.51, 47.39],
+          [8.51, 47.36]
+        ]
+      ]
+    },
+    {
+      "name": "Donut area (outer ring + hole) (Area 2)",
+      "type": "Polygon",
+      "color": "#0066CC",
+      "coordinates": [
+        [
+          [8.525, 47.37],
+          [8.545, 47.37],
+          [8.545, 47.38],
+          [8.525, 47.38],
+          [8.525, 47.37]
+        ]
+      ]
+    },
+    {
+      "name": "Trail network (MultiLineString) (Path)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "coordinates": [
+        [7.58, 47.56],
+        [7.62, 47.58],
+        [7.66, 47.56]
+      ]
+    },
+    {
+      "name": "Trail network (MultiLineString) (Path 2)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "coordinates": [
+        [7.58, 47.52],
+        [7.62, 47.5],
+        [7.66, 47.52]
+      ]
+    },
+    {
+      "name": "Marker",
+      "type": "Point",
+      "color": "#DC143C",
+      "coordinates": [7.719485452126435, 47.60162414351899]
+    },
+    {
+      "name": "Marker",
+      "type": "Point",
+      "color": "#DC143C",
+      "coordinates": [8.38949490925367, 47.60162414351899]
+    },
+    {
+      "name": "Marker",
+      "type": "Point",
+      "color": "#DC143C",
+      "coordinates": [8.38949490925367, 47.189007967450095]
+    },
+    {
+      "name": "Marker",
+      "type": "Point",
+      "color": "#DC143C",
+      "coordinates": [7.719485452126435, 47.189007967450095]
+    }
+  ],
+  "files": ["nested-geometries.geojson"]
+}

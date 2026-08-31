@@ -1,0 +1,37 @@
+{
+  "name": "XML Escaping",
+  "description": "Names and descriptions containing &, <, >, quotes, a line break, non-ASCII text and an emoji, stored escaped in GPX and KML and verbatim in GeoJSON",
+  "expectedFeatures": [
+    {
+      "name": "Tom & Jerry <\"Café\"> 'quoted'",
+      "type": "Point",
+      "color": "#FF8C00",
+      "description": "Line 1\nLine 2: a < b && c > d — Zürich 🗺️",
+      "coordinates": [8.54, 47.37]
+    },
+    {
+      "name": "Route <A> & B",
+      "type": "LineString",
+      "color": "#4169E1",
+      "description": "\"double\" & 'single'",
+      "coordinates": [
+        [8.5, 47.35],
+        [8.6, 47.36]
+      ]
+    },
+    {
+      "name": "Area & <Co>",
+      "type": "Polygon",
+      "color": "#228B22",
+      "coordinates": [
+        [
+          [8.5, 47.3],
+          [8.6, 47.3],
+          [8.6, 47.32],
+          [8.5, 47.3]
+        ]
+      ]
+    }
+  ],
+  "files": ["xml-escaping.geojson", "xml-escaping.gpx", "xml-escaping.kml"]
+}

@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <name>MultiGeometry Test</name>
+    <description>Comprehensive test for all multi-geometry types. MultiGeometry elements are automatically exploded into separate editable features on import.</description>
+
+    <!-- Define styles -->
+    <Style id="placemark-blue">
+      <LineStyle>
+        <color>ffCC6600</color>
+        <width>5</width>
+      </LineStyle>
+    </Style>
+
+    <Style id="placemark-green">
+      <LineStyle>
+        <color>ff3C8C3C</color>
+        <width>5</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>ff3C8C3C</color>
+      </PolyStyle>
+    </Style>
+
+    <Style id="placemark-red">
+      <IconStyle>
+        <color>ff231BE5</color>
+      </IconStyle>
+    </Style>
+
+    <Style id="placemark-orange">
+      <LineStyle>
+        <color>ff0080FF</color>
+        <width>5</width>
+      </LineStyle>
+      <PolyStyle>
+        <color>ff0080FF</color>
+      </PolyStyle>
+    </Style>
+
+    <Style id="placemark-purple">
+      <LineStyle>
+        <color>ffA020F0</color>
+        <width>5</width>
+      </LineStyle>
+    </Style>
+
+    <!-- MultiGeometry with 3 LineStrings -->
+    <Placemark>
+      <name>Multi-segment trail</name>
+      <description>MultiLineString with 3 disconnected segments</description>
+      <styleUrl>#placemark-blue</styleUrl>
+      <MultiGeometry>
+        <LineString>
+          <coordinates>
+            9.0000,45.0000,100
+            9.0010,45.0010,105
+            9.0020,45.0020,110
+          </coordinates>
+        </LineString>
+        <LineString>
+          <coordinates>
+            9.0100,45.0100,150
+            9.0110,45.0110,155
+            9.0120,45.0120,160
+          </coordinates>
+        </LineString>
+        <LineString>
+          <coordinates>
+            9.0200,45.0200,200
+            9.0210,45.0210,205
+            9.0220,45.0220,210
+          </coordinates>
+        </LineString>
+      </MultiGeometry>
+    </Placemark>
+
+    <!-- MultiGeometry with 2 Polygons -->
+    <Placemark>
+      <name>Multi-part park</name>
+      <description>MultiPolygon with 2 disconnected areas</description>
+      <styleUrl>#placemark-green</styleUrl>
+      <MultiGeometry>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                9.0500,45.0500,50
+                9.0520,45.0500,50
+                9.0520,45.0520,55
+                9.0500,45.0520,55
+                9.0500,45.0500,50
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                9.0600,45.0600,60
+                9.0620,45.0600,60
+                9.0620,45.0620,65
+                9.0600,45.0620,65
+                9.0600,45.0600,60
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </MultiGeometry>
+    </Placemark>
+
+    <!-- MultiGeometry with 3 Points -->
+    <Placemark>
+      <name>Waypoint cluster</name>
+      <description>MultiPoint with 3 related points</description>
+      <styleUrl>#placemark-red</styleUrl>
+      <MultiGeometry>
+        <Point>
+          <coordinates>9.0300,45.0300,120</coordinates>
+        </Point>
+        <Point>
+          <coordinates>9.0310,45.0310,125</coordinates>
+        </Point>
+        <Point>
+          <coordinates>9.0320,45.0320,130</coordinates>
+        </Point>
+      </MultiGeometry>
+    </Placemark>
+
+    <!-- MultiGeometry with mixed types (Point + LineString + Polygon) -->
+    <Placemark>
+      <name>Mixed collection</name>
+      <description>GeometryCollection with Point, LineString, and Polygon</description>
+      <styleUrl>#placemark-orange</styleUrl>
+      <MultiGeometry>
+        <Point>
+          <coordinates>9.0400,45.0400,80</coordinates>
+        </Point>
+        <LineString>
+          <coordinates>
+            9.0400,45.0400,80
+            9.0410,45.0410,85
+            9.0420,45.0420,90
+          </coordinates>
+        </LineString>
+        <Polygon>
+          <outerBoundaryIs>
+            <LinearRing>
+              <coordinates>
+                9.0430,45.0430,95
+                9.0450,45.0430,95
+                9.0450,45.0450,100
+                9.0430,45.0450,100
+                9.0430,45.0430,95
+              </coordinates>
+            </LinearRing>
+          </outerBoundaryIs>
+        </Polygon>
+      </MultiGeometry>
+    </Placemark>
+
+    <!-- Normal single LineString for comparison -->
+    <Placemark>
+      <name>Normal trail</name>
+      <description>Regular LineString for comparison</description>
+      <styleUrl>#placemark-purple</styleUrl>
+      <LineString>
+        <coordinates>
+          10.0000,46.0000,300
+          10.0010,46.0010,305
+          10.0020,46.0020,310
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>

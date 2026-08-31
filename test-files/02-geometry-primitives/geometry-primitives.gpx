@@ -1,0 +1,97 @@
+<?xml version="1.0" ?>
+<!-- Standard: GPX 1.1 - https://www.topografix.com/gpx.asp -->
+<gpx xmlns="http://www.topografix.com/GPX/1/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.1" creator="Antigravity" xsi:schemaLocation="http://www.topografix.com/GPX/1/1 http://www.topografix.com/GPX/1/1/gpx.xsd">
+  <trk>
+    <name>Path with elevation</name>
+    <trkseg>
+      <trkpt lat="47.426229" lon="7.553787">
+        <ele>420.5</ele>
+      </trkpt>
+      <trkpt lat="47.433197" lon="7.589836">
+        <ele>435.2</ele>
+      </trkpt>
+      <trkpt lat="47.421351" lon="7.604942">
+        <ele>428.8</ele>
+      </trkpt>
+      <trkpt lat="47.432036" lon="7.624855">
+        <ele>445.1</ele>
+      </trkpt>
+      <trkpt lat="47.4253" lon="7.654381">
+        <ele>438.6</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Path without elevation</name>
+    <trkseg>
+      <trkpt lat="47.411594" lon="7.553444"/>
+      <trkpt lat="47.418564" lon="7.585373"/>
+      <trkpt lat="47.408574" lon="7.606659"/>
+      <trkpt lat="47.416705" lon="7.630005"/>
+      <trkpt lat="47.41322" lon="7.654381"/>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Polygon with elevation</name>
+    <trkseg>
+      <trkpt lat="47.398117" lon="7.55619">
+        <ele>410.3</ele>
+      </trkpt>
+      <trkpt lat="47.379754" lon="7.56649">
+        <ele>402.5</ele>
+      </trkpt>
+      <trkpt lat="47.373245" lon="7.602539">
+        <ele>398.1</ele>
+      </trkpt>
+      <trkpt lat="47.381847" lon="7.660561">
+        <ele>405.6</ele>
+      </trkpt>
+      <trkpt lat="47.400905" lon="7.669144">
+        <ele>422.4</ele>
+      </trkpt>
+      <trkpt lat="47.402067" lon="7.631035">
+        <ele>418.9</ele>
+      </trkpt>
+      <trkpt lat="47.393004" lon="7.609406">
+        <ele>408.2</ele>
+      </trkpt>
+      <trkpt lat="47.404856" lon="7.580223">
+        <ele>415.7</ele>
+      </trkpt>
+      <trkpt lat="47.398117" lon="7.55619">
+        <ele>410.3</ele>
+      </trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Polygon without elevation</name>
+    <trkseg>
+      <trkpt lat="47.399976" lon="7.707596"/>
+      <trkpt lat="47.400441" lon="7.682533"/>
+      <trkpt lat="47.381847" lon="7.6791"/>
+      <trkpt lat="47.372547" lon="7.700043"/>
+      <trkpt lat="47.386031" lon="7.717209"/>
+      <trkpt lat="47.399976" lon="7.707596"/>
+    </trkseg>
+  </trk>
+  <wpt lat="47.362316" lon="7.577133">
+    <name>Marker with elevation</name>
+    <ele>395.8</ele>
+  </wpt>
+  <wpt lat="47.358362" lon="7.617645">
+    <name>Marker without elevation</name>
+  </wpt>
+  <trk>
+    <name>Polygon big overlapping</name>
+    <trkseg>
+      <trkpt lat="47.435287" lon="7.606659"/>
+      <trkpt lat="47.353478" lon="7.604599"/>
+      <trkpt lat="47.367664" lon="7.728195"/>
+      <trkpt lat="47.412756" lon="7.722702"/>
+      <trkpt lat="47.460826" lon="7.5737"/>
+      <trkpt lat="47.408574" lon="7.522202"/>
+      <trkpt lat="47.350222" lon="7.581596"/>
+      <trkpt lat="47.435287" lon="7.606659"/>
+    </trkseg>
+  </trk>
+</gpx>

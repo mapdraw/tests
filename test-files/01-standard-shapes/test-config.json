@@ -1,10 +1,39 @@
 {
   "name": "Standard Shapes",
   "description": "MapDraw exports of a marker, a path (with elevation) and an area, each in a distinct non-default color",
-  "expectedFeatures": {
-    "Marker": { "type": "Point", "color": "#36DB14" },
-    "Path": { "type": "LineString", "color": "#AC3939" },
-    "Area": { "type": "Polygon", "color": "#8FA2FF" }
-  },
+  "expectedFeatures": [
+    {
+      "name": "Marker",
+      "type": "Point",
+      "color": "#36DB14",
+      "coordinates": [9.003295898437502, 46.61171462536894]
+    },
+    {
+      "name": "Path",
+      "type": "LineString",
+      "color": "#AC3939",
+      "coordinates": [
+        [7.547607421875001, 47.409502941311054, 396.3949890136719],
+        [9.113159179687502, 47.36115300722623, 821.8002311582871],
+        [8.129882812500002, 47.230759648346925, 732.4886484004027],
+        [8.959350585937502, 47.06263847995432, 1550.376342773438]
+      ]
+    },
+    {
+      "name": "Area",
+      "type": "Polygon",
+      "color": "#8FA2FF",
+      "coordinates": [
+        [
+          [7.316894531250001, 47.18971246448421],
+          [6.882934570312501, 46.57774276255591],
+          [7.745361328125001, 46.10370875598026],
+          [8.421020507812502, 46.74738913515841],
+          [7.575073242187501, 46.73986059969267],
+          [7.316894531250001, 47.18971246448421]
+        ]
+      ]
+    }
+  ],
   "files": ["test-standard.geojson", "test-standard.gpx", "test-standard.kml", "test-standard.kmz"]
 }

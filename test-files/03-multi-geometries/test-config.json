@@ -1,0 +1,135 @@
+{
+  "name": "Multi-Geometries",
+  "description": "MultiLineString, MultiPolygon, MultiPoint and a mixed GeometryCollection (KML MultiGeometry), each exploded into single features named after the parent. Every coordinate carries an elevation",
+  "expectedFeatures": [
+    {
+      "name": "Multi-segment trail (Path)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.0, 45.0, 100],
+        [9.001, 45.001, 105],
+        [9.002, 45.002, 110]
+      ]
+    },
+    {
+      "name": "Multi-segment trail (Path 2)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.01, 45.01, 150],
+        [9.011, 45.011, 155],
+        [9.012, 45.012, 160]
+      ]
+    },
+    {
+      "name": "Multi-segment trail (Path 3)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.02, 45.02, 200],
+        [9.021, 45.021, 205],
+        [9.022, 45.022, 210]
+      ]
+    },
+    {
+      "name": "Multi-part park (Area)",
+      "type": "Polygon",
+      "color": "#3C8C3C",
+      "description": "MultiPolygon with 2 disconnected areas",
+      "coordinates": [
+        [
+          [9.05, 45.05, 50],
+          [9.052, 45.05, 50],
+          [9.052, 45.052, 55],
+          [9.05, 45.052, 55],
+          [9.05, 45.05, 50]
+        ]
+      ]
+    },
+    {
+      "name": "Multi-part park (Area 2)",
+      "type": "Polygon",
+      "color": "#3C8C3C",
+      "description": "MultiPolygon with 2 disconnected areas",
+      "coordinates": [
+        [
+          [9.06, 45.06, 60],
+          [9.062, 45.06, 60],
+          [9.062, 45.062, 65],
+          [9.06, 45.062, 65],
+          [9.06, 45.06, 60]
+        ]
+      ]
+    },
+    {
+      "name": "Waypoint cluster (Marker)",
+      "type": "Point",
+      "color": "#E51B23",
+      "description": "MultiPoint with 3 related points",
+      "coordinates": [9.03, 45.03, 120]
+    },
+    {
+      "name": "Waypoint cluster (Marker 2)",
+      "type": "Point",
+      "color": "#E51B23",
+      "description": "MultiPoint with 3 related points",
+      "coordinates": [9.031, 45.031, 125]
+    },
+    {
+      "name": "Waypoint cluster (Marker 3)",
+      "type": "Point",
+      "color": "#E51B23",
+      "description": "MultiPoint with 3 related points",
+      "coordinates": [9.032, 45.032, 130]
+    },
+    {
+      "name": "Mixed collection (Marker)",
+      "type": "Point",
+      "color": "#FF8000",
+      "description": "GeometryCollection with Point, LineString, and Polygon",
+      "coordinates": [9.04, 45.04, 80]
+    },
+    {
+      "name": "Mixed collection (Path)",
+      "type": "LineString",
+      "color": "#FF8000",
+      "description": "GeometryCollection with Point, LineString, and Polygon",
+      "coordinates": [
+        [9.04, 45.04, 80],
+        [9.041, 45.041, 85],
+        [9.042, 45.042, 90]
+      ]
+    },
+    {
+      "name": "Mixed collection (Area)",
+      "type": "Polygon",
+      "color": "#FF8000",
+      "description": "GeometryCollection with Point, LineString, and Polygon",
+      "coordinates": [
+        [
+          [9.043, 45.043, 95],
+          [9.045, 45.043, 95],
+          [9.045, 45.045, 100],
+          [9.043, 45.045, 100],
+          [9.043, 45.043, 95]
+        ]
+      ]
+    },
+    {
+      "name": "Normal trail",
+      "type": "LineString",
+      "color": "#F020A0",
+      "description": "Regular LineString for comparison",
+      "coordinates": [
+        [10.0, 46.0, 300],
+        [10.001, 46.001, 305],
+        [10.002, 46.002, 310]
+      ]
+    }
+  ],
+  "files": ["multigeometry-test.geojson", "multigeometry-test.kml"]
+}

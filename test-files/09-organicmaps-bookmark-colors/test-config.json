@@ -1,0 +1,269 @@
+{
+  "name": "Organic Maps Bookmark Colors",
+  "description": "Organic Maps (2026.08.27) exports of one bookmark and one track in each of its 16 colors. Bookmarks use a shared KML Style, tracks an inline LineStyle. The default red bookmark is a special case: the GeoJSON export writes the CSS name \"red\" and the GPX export no color at all",
+  "expectedFeatures": [
+    {
+      "name": "Red",
+      "type": "Point",
+      "color": "#E51B23",
+      "coordinates": [8.085938, 47.439235]
+    },
+    {
+      "name": "Pink",
+      "type": "Point",
+      "color": "#FF4182",
+      "coordinates": [8.552856, 47.387193]
+    },
+    {
+      "name": "Purple",
+      "type": "Point",
+      "color": "#9B24B2",
+      "coordinates": [8.794556, 47.253136]
+    },
+    {
+      "name": "DeepPurple",
+      "type": "Point",
+      "color": "#6639BF",
+      "coordinates": [9.074707, 47.156105]
+    },
+    {
+      "name": "Blue",
+      "type": "Point",
+      "color": "#0066CC",
+      "coordinates": [8.794556, 46.984]
+    },
+    {
+      "name": "LightBlue",
+      "type": "Point",
+      "color": "#249CF2",
+      "coordinates": [9.179077, 46.905246]
+    },
+    {
+      "name": "Cyan",
+      "type": "Point",
+      "color": "#14BECD",
+      "coordinates": [9.684448, 46.845164]
+    },
+    {
+      "name": "Teal",
+      "type": "Point",
+      "color": "#00A58C",
+      "coordinates": [9.030762, 46.694667]
+    },
+    {
+      "name": "Green",
+      "type": "Point",
+      "color": "#3C8C3C",
+      "coordinates": [9.547119, 46.600393]
+    },
+    {
+      "name": "Lime",
+      "type": "Point",
+      "color": "#93BF39",
+      "coordinates": [8.756104, 46.483265]
+    },
+    {
+      "name": "Yellow",
+      "type": "Point",
+      "color": "#FFC800",
+      "coordinates": [9.18457, 46.346928]
+    },
+    {
+      "name": "Orange",
+      "type": "Point",
+      "color": "#FF9600",
+      "coordinates": [8.964844, 46.21025]
+    },
+    {
+      "name": "DeepOrange",
+      "type": "Point",
+      "color": "#F06432",
+      "coordinates": [9.107666, 46.042736]
+    },
+    {
+      "name": "Brown",
+      "type": "Point",
+      "color": "#804633",
+      "coordinates": [8.668213, 45.970243]
+    },
+    {
+      "name": "Gray",
+      "type": "Point",
+      "color": "#737373",
+      "coordinates": [8.410034, 45.859412]
+    },
+    {
+      "name": "BlueGray",
+      "type": "Point",
+      "color": "#597380",
+      "coordinates": [8.580322, 45.667805]
+    },
+    {
+      "name": "Red",
+      "type": "LineString",
+      "color": "#E51B23",
+      "coordinates": [
+        [7.245483, 47.346267],
+        [7.915649, 47.446665]
+      ]
+    },
+    {
+      "name": "Pink",
+      "type": "LineString",
+      "color": "#FF4182",
+      "coordinates": [
+        [7.174072, 47.253136],
+        [8.415527, 47.379754]
+      ]
+    },
+    {
+      "name": "Purple",
+      "type": "LineString",
+      "color": "#9B24B2",
+      "coordinates": [
+        [7.185059, 47.208374],
+        [8.629761, 47.268048]
+      ]
+    },
+    {
+      "name": "DeepPurple",
+      "type": "LineString",
+      "color": "#6639BF",
+      "coordinates": [
+        [7.097168, 47.133688],
+        [8.953857, 47.16731]
+      ]
+    },
+    {
+      "name": "Blue",
+      "type": "LineString",
+      "color": "#0066CC",
+      "coordinates": [
+        [7.146606, 47.077604],
+        [8.607788, 47.058896]
+      ]
+    },
+    {
+      "name": "LightBlue",
+      "type": "LineString",
+      "color": "#249CF2",
+      "coordinates": [
+        [6.987305, 47.025206],
+        [9.041748, 46.942762]
+      ]
+    },
+    {
+      "name": "Cyan",
+      "type": "LineString",
+      "color": "#14BECD",
+      "coordinates": [
+        [6.833496, 46.961511],
+        [9.558105, 46.856435]
+      ]
+    },
+    {
+      "name": "Teal",
+      "type": "LineString",
+      "color": "#00A58C",
+      "coordinates": [
+        [6.833496, 46.890232],
+        [8.876953, 46.788777]
+      ]
+    },
+    {
+      "name": "Green",
+      "type": "LineString",
+      "color": "#3C8C3C",
+      "coordinates": [
+        [6.811523, 46.811339],
+        [9.360352, 46.645665]
+      ]
+    },
+    {
+      "name": "Lime",
+      "type": "LineString",
+      "color": "#93BF39",
+      "coordinates": [
+        [6.811523, 46.754917],
+        [8.580322, 46.562637]
+      ]
+    },
+    {
+      "name": "Yellow",
+      "type": "LineString",
+      "color": "#FFC800",
+      "coordinates": [
+        [6.800537, 46.694667],
+        [9.008789, 46.415139]
+      ]
+    },
+    {
+      "name": "Orange",
+      "type": "LineString",
+      "color": "#FF9600",
+      "coordinates": [
+        [6.860962, 46.619261],
+        [8.789063, 46.316584]
+      ]
+    },
+    {
+      "name": "DeepOrange",
+      "type": "LineString",
+      "color": "#F06432",
+      "coordinates": [
+        [6.882935, 46.536193],
+        [8.942871, 46.141783]
+      ]
+    },
+    {
+      "name": "Brown",
+      "type": "LineString",
+      "color": "#804633",
+      "coordinates": [
+        [6.877441, 46.464349],
+        [8.459473, 46.073231]
+      ]
+    },
+    {
+      "name": "Gray",
+      "type": "LineString",
+      "color": "#737373",
+      "coordinates": [
+        [6.82251, 46.381044],
+        [8.234253, 45.958788]
+      ]
+    },
+    {
+      "name": "BlueGray",
+      "type": "LineString",
+      "color": "#597380",
+      "coordinates": [
+        [6.767578, 46.305201],
+        [8.426514, 45.73686]
+      ]
+    }
+  ],
+  "files": [
+    {
+      "file": "organicmaps-bookmark-colors.geojson",
+      "overrides": [
+        {
+          "name": "Red",
+          "type": "Point",
+          "color": "#FF0000"
+        }
+      ]
+    },
+    {
+      "file": "organicmaps-bookmark-colors.gpx",
+      "overrides": [
+        {
+          "name": "Red",
+          "type": "Point",
+          "color": "#DC143C"
+        }
+      ]
+    },
+    "organicmaps-bookmark-colors.kmz"
+  ]
+}

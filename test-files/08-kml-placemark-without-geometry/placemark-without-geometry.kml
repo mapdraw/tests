@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Regression test: a <Placemark> without geometry must not break icon colors.
+
+  toGeoJSON emits no feature for a placemark that has no Point/LineString/Polygon/Track,
+  so a description-only note shifts the DOM placemark list out of step with the feature
+  list. Icon colors are recovered by walking those two lists in parallel, so before the
+  fix a single note like the two below silently stripped the color off every marker in
+  the file. The notes here sit first and in the middle, shifting by one and then by two.
+
+  Import this file: every item must show the color named in its own title.
+  A failure looks like markers falling back to the app default color (crimson).
+
+  Covered color sources:
+    - shared <Style id> referenced by <styleUrl>        (Organic Maps exports)
+    - <StyleMap> -> normal pair -> <Style>              (Google Earth exports)
+    - inline <Style><IconStyle><color>                  (this app's own exports)
+    - icon href ?color= parameter                       (Google Earth tinted pins)
+    - <LineStyle><color> on paths
+    - mixed MultiGeometry: line and point parts keep the LineStyle color
+-->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+<Document>
+  <name>placemark-without-geometry</name>
+  <description>Every item must import with the color named in its title.</description>
+
+  <!-- Shared styles, KML color order is AABBGGRR -->
+  <Style id="style-red">
+    <IconStyle><color>FF231BE5</color></IconStyle>
+  </Style>
+  <Style id="style-green">
+    <IconStyle><color>FF3C8C3C</color></IconStyle>
+  </Style>
+  <StyleMap id="style-map-green">
+    <Pair><key>normal</key><styleUrl>#style-green</styleUrl></Pair>
+    <Pair><key>highlight</key><styleUrl>#style-red</styleUrl></Pair>
+  </StyleMap>
+  <Style id="style-orange-icon-url">
+    <IconStyle>
+      <Icon><href>https://earth.google.com/earth/document/icon?color=ff9600&amp;id=2000&amp;scale=4</href></Icon>
+    </IconStyle>
+  </Style>
+  <Style id="style-cyan-line-and-icon">
+    <LineStyle><color>FFCDBE14</color></LineStyle>
+    <IconStyle><color>FF231BE5</color></IconStyle>
+  </Style>
+
+  <!-- Shifts everything after it by one -->
+  <Placemark>
+    <name>Note 1 - no geometry</name>
+    <description>A description-only placemark. It produces no map feature.</description>
+  </Placemark>
+
+  <Placemark>
+    <name>Marker 1 - shared style - expect RED E51B23</name>
+    <styleUrl>#style-red</styleUrl>
+    <Point><coordinates>8.40,47.40,0</coordinates></Point>
+  </Placemark>
+
+  <Placemark>
+    <name>Marker 2 - StyleMap - expect GREEN 3C8C3C</name>
+    <styleUrl>#style-map-green</styleUrl>
+    <Point><coordinates>8.45,47.40,0</coordinates></Point>
+  </Placemark>
+
+  <!-- Shifts everything after it by two -->
+  <Placemark>
+    <name>Note 2 - no geometry</name>
+    <description>A second description-only placemark, in the middle of the document.</description>
+  </Placemark>
+
+  <Placemark>
+    <name>Marker 3 - inline IconStyle - expect BLUE 0066CC</name>
+    <Style><IconStyle><color>FFCC6600</color></IconStyle></Style>
+    <Point><coordinates>8.50,47.40,0</coordinates></Point>
+  </Placemark>
+
+  <Placemark>
+    <name>Marker 4 - icon url color - expect ORANGE FF9600</name>
+    <styleUrl>#style-orange-icon-url</styleUrl>
+    <Point><coordinates>8.55,47.40,0</coordinates></Point>
+  </Placemark>
+
+  <Placemark>
+    <name>Markers 5+6 - multi point - expect GREEN 3C8C3C</name>
+    <styleUrl>#style-green</styleUrl>
+    <MultiGeometry>
+      <Point><coordinates>8.60,47.40,0</coordinates></Point>
+      <Point><coordinates>8.65,47.40,0</coordinates></Point>
+    </MultiGeometry>
+  </Placemark>
+
+  <Placemark>
+    <name>Path 1 - LineStyle - expect PURPLE 9B24B2</name>
+    <Style><LineStyle><color>FFB2249B</color></LineStyle></Style>
+    <LineString><coordinates>8.40,47.35 8.65,47.35</coordinates></LineString>
+  </Placemark>
+
+  <Placemark>
+    <name>Path 2 + Marker 7 - mixed - expect CYAN 14BECD on both</name>
+    <styleUrl>#style-cyan-line-and-icon</styleUrl>
+    <MultiGeometry>
+      <LineString><coordinates>8.40,47.30 8.65,47.30</coordinates></LineString>
+      <Point><coordinates>8.525,47.28,0</coordinates></Point>
+    </MultiGeometry>
+  </Placemark>
+</Document>
+</kml>

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="MapDraw.net" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+    xmlns:app="https://www.mapdraw.net">
+  <wpt lat="47.37" lon="8.54">
+    <name>Tom &amp; Jerry &lt;&quot;Café&quot;&gt; &apos;quoted&apos;</name>
+    <desc>Line 1
+Line 2: a &lt; b &amp;&amp; c &gt; d — Zürich 🗺️</desc>
+    <extensions>
+      <app:color>#FFFF8C00</app:color>
+    </extensions>
+  </wpt>
+  <trk>
+    <name>Route &lt;A&gt; &amp; B</name>
+    <desc>&quot;double&quot; &amp; &apos;single&apos;</desc>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>4169E1</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
+    <trkseg>
+      <trkpt lat="47.35" lon="8.5"></trkpt>
+      <trkpt lat="47.36" lon="8.6"></trkpt>
+    </trkseg>
+  </trk>
+  <trk>
+    <name>Area &amp; &lt;Co&gt;</name>
+    <extensions>
+      <gpx_style:line>
+        <gpx_style:color>228B22</gpx_style:color>
+      </gpx_style:line>
+    </extensions>
+    <trkseg>
+      <trkpt lat="47.3" lon="8.5"></trkpt>
+      <trkpt lat="47.3" lon="8.6"></trkpt>
+      <trkpt lat="47.32" lon="8.6"></trkpt>
+      <trkpt lat="47.3" lon="8.5"></trkpt>
+    </trkseg>
+  </trk>
+</gpx>

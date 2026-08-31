@@ -1,0 +1,12 @@
+[
+  "01-standard-shapes",
+  "02-geometry-primitives",
+  "03-multi-geometries",
+  "04-multi-segment-gpx",
+  "05-nested-geojson-geometries",
+  "06-geojson-color-keys",
+  "07-gpx-colors",
+  "08-kml-placemark-without-geometry",
+  "09-organicmaps-bookmark-colors",
+  "10-xml-escaping"
+]

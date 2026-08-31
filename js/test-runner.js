@@ -9,36 +9,57 @@ let dependenciesLoaded = false;
 let allTestResults = [];
 
 /**
- * Discovers test suites by scanning the test-files directory.
- * Each subdirectory with a test-config.json is a test suite.
+ * Loads the test suites listed in test-files/suites.json, each a folder with a
+ * test-config.json. A missing or broken suite fails the run rather than being
+ * skipped silently.
  *
  * @returns {Promise<Object[]>} Array of test suite configurations
  */
 async function discoverTestSuites() {
-  // For now, we'll use a known list of test suites
-  // In a more dynamic setup, this could scan the directory
-  const knownSuites = ["01-standard-shapes"];
+  // no-store: manifest, configs and fixtures are edited between runs, and a cached
+  // copy silently tests the previous version.
+  const fetchJson = async (path) => {
+    const response = await fetch(path, { cache: "no-store" });
+    if (!response.ok) throw new Error(`Could not load ${path} (HTTP ${response.status})`);
+    return response.json();
+  };
 
-  const suites = [];
+  const suiteNames = await fetchJson("./test-files/suites.json");
+  return Promise.all(
+    suiteNames.map(async (suiteName) => {
+      const config = await fetchJson(`./test-files/${suiteName}/test-config.json`);
+      config.path = suiteName;
+      // A file entry is a bare filename, or { file, overrides } when that file's
+      // features deviate from the suite's shared expectations.
+      config.files = config.files.map((entry) =>
+        typeof entry === "string" ? { file: entry } : entry,
+      );
+      return config;
+    }),
+  );
+}
 
-  for (const suiteName of knownSuites) {
-    try {
-      // no-store: config and fixtures are edited between runs, and a cached copy
-      // silently tests the previous version.
-      const response = await fetch(`./test-files/${suiteName}/test-config.json`, {
-        cache: "no-store",
-      });
-      if (response.ok) {
-        const config = await response.json();
-        config.path = suiteName;
-        suites.push(config);
-      }
-    } catch (error) {
-      console.warn(`Could not load test suite ${suiteName}:`, error);
+/**
+ * The suite's expected features with a file entry's overrides applied. An override
+ * names a feature by name and type and replaces the fields it lists - e.g. the
+ * color of a feature whose source format can't carry it.
+ *
+ * @param {Object} suiteConfig - Test suite configuration
+ * @param {Object} entry - File entry from the suite's files list
+ * @returns {Object[]} Expected features for this file
+ */
+function expectedForFile(suiteConfig, entry) {
+  const expected = suiteConfig.expectedFeatures.map((feature) => ({ ...feature }));
+  (entry.overrides || []).forEach((override) => {
+    const target = expected.find((f) => f.name === override.name && f.type === override.type);
+    if (!target) {
+      throw new Error(
+        `${entry.file}: override matches no expected feature: "${override.name}" (${override.type})`,
+      );
     }
-  }
-
-  return suites;
+    Object.assign(target, override);
+  });
+  return expected;
 }
 
 /**
@@ -171,7 +192,7 @@ async function loadAndImportFile(suitePath, filename, importFunction) {
  * Imports a File through one of the app's import functions and waits for the
  * resulting layers to land in importedItems.
  *
- * @param {File} file - The file to import
+ * @param {File} file - The File to import
  * @param {Function} importFunction - The import function to use
  * @returns {Promise<Object>} Import result with features and layers
  */
@@ -255,99 +276,77 @@ function getFormatName(filename) {
 }
 
 /**
- * Runs a single format test within a test suite.
+ * Runs a single format test within a test suite: imports the file, validates
+ * it, exports it to every format and validates each re-import.
  *
  * @param {Object} suiteConfig - Test suite configuration
- * @param {string} filename - File to test
+ * @param {Object} entry - File entry from the suite's files list
  * @returns {Promise<Object>} Test result
  */
-async function runFormatTest(suiteConfig, filename) {
+async function runFormatTest(suiteConfig, entry) {
+  const filename = entry.file;
   const formatName = getFormatName(filename);
-  const importFunction = getImportFunction(filename);
   const isGpx = formatName === "GPX";
 
-  TestUI.updateStatus(`Testing ${formatName}...`);
+  TestUI.updateStatus(`${suiteConfig.name}: testing ${formatName}...`);
 
   try {
-    // Step 1: Import the file
+    const expected = expectedForFile(suiteConfig, entry);
+    const importFunction = getImportFunction(filename);
+    if (!importFunction) throw new Error(`No import function for ${filename}`);
+
+    // Step 1: Import the file and validate its features
     const importResult = await loadAndImportFile(suiteConfig.path, filename, importFunction);
+    const importValidation = TestValidators.validateFeatures(importResult.features, expected, {
+      allowGpxPolygonAsLineString: isGpx,
+    });
 
-    // Step 2: Validate imported features against expected
-    const importValidation = TestValidators.validateFeatures(
-      importResult.features,
-      suiteConfig.expectedFeatures,
-      { allowGpxPolygonAsLineString: isGpx },
-    );
-
-    // Step 3: Export to every format the app can write. All exports run before
+    // Step 2: Export to every format the app can write. All exports run before
     // any re-import below, because re-importing replaces the imported layers.
-    const exportedContent = {};
+    const exports = {};
     for (const exportFormat of ExportCapture.FORMATS) {
-      exportedContent[exportFormat] = ExportCapture.captureExport(exportFormat);
+      exports[exportFormat] = { content: ExportCapture.captureExport(exportFormat) };
     }
 
-    // Step 4: Round-trip each export back through the app's own importer, so
+    // Step 3: Round-trip each export back through the app's own importer, so
     // exported geometry and colors are read by the same code a user's re-import
     // would use, rather than by a parser maintained only inside these tests.
-    const exportValidations = {};
-    let exportedFeatures = [];
-
     for (const exportFormat of ExportCapture.FORMATS) {
       const exportFilename = `export.${ExportCapture.EXPORT_EXTENSIONS[exportFormat]}`;
       const reimported = await importFile(
-        new File([exportedContent[exportFormat]], exportFilename),
+        new File([exports[exportFormat].content], exportFilename),
         getImportFunction(exportFilename),
       );
 
       // GPX has no polygon type, so a polygon comes back as a closed LineString
       // whether it lost the type on the way in or on the way out.
-      exportValidations[exportFormat] = TestValidators.validateFeatures(
+      exports[exportFormat].features = reimported.features;
+      exports[exportFormat].validation = TestValidators.validateFeatures(
         reimported.features,
-        suiteConfig.expectedFeatures,
+        expected,
         { allowGpxPolygonAsLineString: isGpx || exportFormat === "GPX" },
       );
-
-      if (exportFormat === "GeoJSON") {
-        exportedFeatures = reimported.features;
-      }
     }
 
-    // Step 5: Merge the per-format results into the single exportResult the UI
-    // renders. Issues are prefixed so a failure names the format that broke.
-    const exportValidation = {
-      passed: Object.values(exportValidations).every((v) => v.passed),
-      issues: Object.entries(exportValidations).flatMap(([fmt, v]) =>
-        v.issues.map((issue) => `${fmt}: ${issue}`),
-      ),
-      featureResults: exportValidations.GeoJSON.featureResults,
-    };
-
     // Overall pass: import and every export format must pass
-    const passed = importValidation.passed && exportValidation.passed;
+    const passed =
+      importValidation.passed && Object.values(exports).every((e) => e.validation.passed);
 
     return {
       format: formatName,
       filename: filename,
       passed: passed,
-      importResult: importValidation,
-      exportResult: exportValidation,
+      importValidation: importValidation,
       importedFeatures: importResult.features,
-      exportedFeatures: exportedFeatures,
-      exportedGeoJson: exportedContent.GeoJSON,
-      exportValidations: exportValidations,
+      exports: exports,
     };
   } catch (error) {
-    console.error(`Error testing ${formatName}:`, error);
+    console.error(`Error testing ${filename}:`, error);
     return {
       format: formatName,
       filename: filename,
       passed: false,
       error: error.message,
-      importResult: { passed: false, issues: [error.message] },
-      exportResult: { passed: false, issues: [] },
-      importedFeatures: [],
-      exportedFeatures: [],
-      exportedGeoJson: null,
     };
   }
 }
@@ -365,8 +364,8 @@ async function runTestSuite(suiteConfig, suiteElement) {
 
   const formatResults = [];
 
-  for (const filename of suiteConfig.files) {
-    const result = await runFormatTest(suiteConfig, filename);
+  for (const entry of suiteConfig.files) {
+    const result = await runFormatTest(suiteConfig, entry);
     formatResults.push(result);
 
     // Display result immediately
@@ -389,10 +388,12 @@ async function runTestSuite(suiteConfig, suiteElement) {
 async function runAllTests() {
   const runBtn = document.getElementById("run-all-btn");
   const copyBtn = document.getElementById("copy-btn");
+  const downloadBtn = document.getElementById("download-btn");
   const suitesContainer = document.getElementById("test-suites");
 
   runBtn.disabled = true;
   copyBtn.style.display = "none";
+  downloadBtn.style.display = "none";
   allTestResults = [];
   TestUI.clearError();
 
@@ -407,7 +408,7 @@ async function runAllTests() {
     const suites = await discoverTestSuites();
 
     if (suites.length === 0) {
-      TestUI.showError("No test suites found in test-files directory.");
+      TestUI.showError("No test suites listed in test-files/suites.json.");
       return;
     }
 
@@ -428,8 +429,9 @@ async function runAllTests() {
       allTestResults.push(result);
     }
 
-    TestUI.updateStatus("Tests complete!");
+    TestUI.updateStatus(TestUI.summarizeResults(allTestResults));
     copyBtn.style.display = "inline-block";
+    downloadBtn.style.display = "inline-block";
 
     // Log results to console
     console.log(TestUI.formatResultsAsText(allTestResults));
@@ -458,13 +460,43 @@ function copyResults() {
 }
 
 /**
- * Initializes the test runner.
+ * Bundles every file the exports produced into one zip and downloads it, for
+ * schema validation outside the browser: ./validate-exports.sh <the zip>.
+ * One entry per export: <suite>/<source file>/export.<format extension>.
+ */
+async function downloadExports() {
+  const zip = new JSZip();
+  allTestResults.forEach((suiteResult) => {
+    suiteResult.formatResults.forEach((fr) => {
+      if (!fr.exports) return;
+      Object.entries(fr.exports).forEach(([format, exported]) => {
+        const extension = ExportCapture.EXPORT_EXTENSIONS[format];
+        zip.file(`${suiteResult.config.path}/${fr.filename}/export.${extension}`, exported.content);
+      });
+    });
+  });
+  const url = URL.createObjectURL(await zip.generateAsync({ type: "blob" }));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "mapdraw-test-exports.zip";
+  link.click();
+  URL.revokeObjectURL(url);
+}
+
+/**
+ * Initializes the test runner. With ?autorun in the URL, the tests start
+ * immediately - handy when re-running after every code change.
  */
 function initTestRunner() {
   document.getElementById("run-all-btn").addEventListener("click", runAllTests);
   document.getElementById("copy-btn").addEventListener("click", copyResults);
+  document.getElementById("download-btn").addEventListener("click", downloadExports);
 
-  console.log('Test runner ready! Click "Run All Tests" to begin.');
+  if (new URLSearchParams(location.search).has("autorun")) {
+    runAllTests();
+  } else {
+    console.log('Test runner ready! Click "Run All Tests" to begin.');
+  }
 }
 
 // Initialize when DOM is ready
@@ -483,5 +515,6 @@ if (typeof window !== "undefined") {
     runTestSuite,
     runAllTests,
     copyResults,
+    downloadExports,
   };
 }

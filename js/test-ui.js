@@ -10,6 +10,7 @@
  * @param {Object} suiteConfig - Test suite configuration
  * @param {string} suiteConfig.name - Suite name
  * @param {string} suiteConfig.description - Suite description
+ * @param {Object[]} suiteConfig.expectedFeatures - Expected features
  * @returns {HTMLElement} The test suite container element
  */
 function createTestSuiteElement(suiteConfig) {
@@ -20,7 +21,7 @@ function createTestSuiteElement(suiteConfig) {
   const header = document.createElement("div");
   header.className = "test-suite-header";
   header.innerHTML = `
-    <h2>${suiteConfig.name}</h2>
+    <h2>${escapeHtml(suiteConfig.name)}</h2>
     <span class="test-suite-status pending">Not run yet</span>
   `;
   header.addEventListener("click", () => toggleSuiteCollapse(suite));
@@ -37,21 +38,18 @@ function createTestSuiteElement(suiteConfig) {
   }
 
   // Expected features summary
-  if (suiteConfig.expectedFeatures) {
-    const expectedDiv = document.createElement("div");
-    expectedDiv.className = "expected-features";
-
-    const featuresList = Object.entries(suiteConfig.expectedFeatures)
-      .map(([name, props]) => {
-        return `<span class="expected-feature"><strong>${escapeHtml(name)}</strong> (${props.type}, ${props.color})</span>`;
-      })
-      .join("");
-
-    expectedDiv.innerHTML = `
-      <strong>Expected features:</strong> ${featuresList}
-    `;
-    content.appendChild(expectedDiv);
-  }
+  const expectedDiv = document.createElement("div");
+  expectedDiv.className = "expected-features";
+  const featuresList = suiteConfig.expectedFeatures
+    .map(
+      (f) =>
+        `<span class="expected-feature"><strong>${escapeHtml(f.name)}</strong> (${f.type}, ${escapeHtml(f.color)})</span>`,
+    )
+    .join("");
+  expectedDiv.innerHTML = `
+    <strong>Expected features (${suiteConfig.expectedFeatures.length}):</strong> ${featuresList}
+  `;
+  content.appendChild(expectedDiv);
 
   const resultsContainer = document.createElement("div");
   resultsContainer.className = "format-results";
@@ -84,7 +82,7 @@ function updateSuiteStatus(suiteElement, formatResults) {
   // Build format status indicators
   const formatStatus = formatResults
     .map((fr) => {
-      const icon = fr.passed ? "\u2713" : "\u2717";
+      const icon = fr.passed ? "✓" : "✗";
       const iconClass = fr.passed ? "format-icon-pass" : "format-icon-fail";
       return `<span class="${iconClass}">${icon}</span><span class="format-name">${fr.format}</span>`;
     })
@@ -94,24 +92,16 @@ function updateSuiteStatus(suiteElement, formatResults) {
   statusEl.className = "test-suite-status";
 
   const allPassed = formatResults.every((r) => r.passed);
-  if (allPassed) {
-    statusEl.classList.add("passed");
-  } else {
-    statusEl.classList.add("failed");
-  }
+  statusEl.classList.add(allPassed ? "passed" : "failed");
+  // A failed suite opens itself so the failure is visible without clicking through
+  if (!allPassed) suiteElement.classList.remove("collapsed");
 }
 
 /**
- * Creates a format test result element with side-by-side comparison.
+ * Creates a format test result element: the imported features next to each
+ * export format's re-imported features.
  *
- * @param {Object} result - Test result object
- * @param {string} result.format - Format name (GeoJSON, GPX, etc.)
- * @param {boolean} result.passed - Whether both import and export passed
- * @param {Object} result.importResult - Import validation result
- * @param {Object} result.exportResult - Export validation result
- * @param {Object[]} result.importedFeatures - Features from import
- * @param {Object[]} result.exportedFeatures - Features from export
- * @param {Object} result.exportedGeoJson - The exported GeoJSON object
+ * @param {Object} result - Test result object from runFormatTest()
  * @returns {HTMLElement} The format test element
  */
 function createFormatTestElement(result) {
@@ -122,39 +112,34 @@ function createFormatTestElement(result) {
   const header = document.createElement("div");
   header.className = "format-test-header";
   header.innerHTML = `
-    <h3>${result.format}</h3>
+    <h3>${result.format} <small>${escapeHtml(result.filename)}</small></h3>
     <span class="format-test-status">${result.passed ? "PASS" : "FAIL"}</span>
   `;
   formatTest.appendChild(header);
 
-  // Side-by-side comparison
+  if (result.error) {
+    const errorDiv = document.createElement("div");
+    errorDiv.className = "error-box";
+    errorDiv.textContent = result.error;
+    formatTest.appendChild(errorDiv);
+    return formatTest;
+  }
+
+  // Side-by-side comparison: import, then one panel per export format
   const comparison = document.createElement("div");
   comparison.className = "comparison-container";
-
-  // Import panel
-  const importPanel = createComparisonPanel(
-    "Imported",
-    result.importedFeatures,
-    result.importResult,
-    "import-panel",
-  );
-  comparison.appendChild(importPanel);
-
-  // Export panel
-  const exportPanel = createComparisonPanel(
-    "Exported (→ GeoJSON)",
-    result.exportedFeatures,
-    result.exportResult,
-    "export-panel",
-  );
-  comparison.appendChild(exportPanel);
-
+  comparison.appendChild(createComparisonPanel("Imported", result.importValidation));
+  Object.entries(result.exports).forEach(([format, exported]) => {
+    comparison.appendChild(createComparisonPanel(`Exported → ${format}`, exported.validation));
+  });
   formatTest.appendChild(comparison);
 
-  // Issues list (if any)
+  // Issues list (if any), each prefixed with the step that produced it
   const allIssues = [
-    ...(result.importResult?.issues || []).map((i) => `Import: ${i}`),
-    ...(result.exportResult?.issues || []).map((i) => `Export: ${i}`),
+    ...result.importValidation.issues.map((i) => `Import: ${i}`),
+    ...Object.entries(result.exports).flatMap(([format, exported]) =>
+      exported.validation.issues.map((i) => `Export → ${format}: ${i}`),
+    ),
   ];
 
   if (allIssues.length > 0) {
@@ -169,25 +154,21 @@ function createFormatTestElement(result) {
     formatTest.appendChild(issuesDiv);
   }
 
-  // JSON toggle
-  const jsonToggle = createJsonToggle(result.importedFeatures, result.exportedGeoJson);
-  formatTest.appendChild(jsonToggle);
+  formatTest.appendChild(createDetailsToggle(result));
 
   return formatTest;
 }
 
 /**
- * Creates a comparison panel showing feature list.
+ * Creates a comparison panel listing a validation's features with their status.
  *
  * @param {string} title - Panel title
- * @param {Object[]} features - Array of feature data
- * @param {Object} validationResult - Validation result with featureResults
- * @param {string} panelClass - Additional CSS class for the panel
+ * @param {Object} validation - Result of validateFeatures()
  * @returns {HTMLElement} The comparison panel element
  */
-function createComparisonPanel(title, features, validationResult, panelClass) {
+function createComparisonPanel(title, validation) {
   const panel = document.createElement("div");
-  panel.className = `comparison-panel ${panelClass}`;
+  panel.className = "comparison-panel";
 
   const titleEl = document.createElement("h4");
   titleEl.textContent = title;
@@ -196,7 +177,7 @@ function createComparisonPanel(title, features, validationResult, panelClass) {
   const featureList = document.createElement("ul");
   featureList.className = "feature-list";
 
-  if (!features || features.length === 0) {
+  if (validation.features.length === 0) {
     const emptyItem = document.createElement("li");
     emptyItem.className = "feature-item missing";
     emptyItem.innerHTML = `
@@ -204,91 +185,75 @@ function createComparisonPanel(title, features, validationResult, panelClass) {
       <span class="feature-status"></span>
     `;
     featureList.appendChild(emptyItem);
-  } else {
-    features.forEach((feature) => {
-      const featureResult = validationResult?.featureResults?.[feature.name];
-      const isValid = featureResult?.valid !== false;
-
-      const item = document.createElement("li");
-      item.className = `feature-item ${isValid ? "valid" : "invalid"}`;
-
-      item.innerHTML = `
-        <span class="feature-name">${escapeHtml(feature.name)}</span>
-        <span class="feature-details">${feature.type}, ${feature.colorName}</span>
-        <span class="feature-status"></span>
-      `;
-
-      featureList.appendChild(item);
-    });
   }
 
-  // Add missing features from validation
-  if (validationResult?.featureResults) {
-    Object.keys(validationResult.featureResults).forEach((name) => {
-      const fr = validationResult.featureResults[name];
-      if (!fr.found) {
-        const item = document.createElement("li");
-        item.className = "feature-item missing";
-        item.innerHTML = `
-          <span class="feature-name">${escapeHtml(name)}</span>
-          <span class="feature-details">Missing</span>
-          <span class="feature-status"></span>
-        `;
-        featureList.appendChild(item);
-      }
-    });
-  }
+  validation.features.forEach((feature) => {
+    const item = document.createElement("li");
+    item.className = `feature-item ${feature.issues.length === 0 ? "valid" : "invalid"}`;
+    item.innerHTML = `
+      <span class="feature-name">${escapeHtml(feature.name)}</span>
+      <span class="feature-details">${feature.type}, ${escapeHtml(feature.colorName)}</span>
+      <span class="feature-status"></span>
+      ${feature.issues.map((issue) => `<span class="feature-issue">${escapeHtml(issue)}</span>`).join("")}
+    `;
+    featureList.appendChild(item);
+  });
+
+  validation.missing.forEach((feature) => {
+    const item = document.createElement("li");
+    item.className = "feature-item missing";
+    item.innerHTML = `
+      <span class="feature-name">${escapeHtml(feature.name)}</span>
+      <span class="feature-details">${feature.type}, missing</span>
+      <span class="feature-status"></span>
+    `;
+    featureList.appendChild(item);
+  });
 
   panel.appendChild(featureList);
   return panel;
 }
 
 /**
- * Creates a toggleable JSON output section.
+ * Creates a toggleable details section: the imported features as JSON, and the
+ * exact file content each export produced.
  *
- * @param {Object[]} importedFeatures - Imported feature data
- * @param {Object} exportedGeoJson - Exported GeoJSON object
- * @returns {HTMLElement} The JSON toggle element
+ * @param {Object} result - Test result object from runFormatTest()
+ * @returns {HTMLElement} The details toggle element
  */
-function createJsonToggle(importedFeatures, exportedGeoJson) {
+function createDetailsToggle(result) {
   const container = document.createElement("div");
-  container.className = "json-toggle";
+  container.className = "details-toggle";
 
   const button = document.createElement("button");
-  button.className = "json-toggle-btn";
-  button.textContent = "Show JSON";
+  button.className = "details-toggle-btn";
+  button.textContent = "Show details";
   container.appendChild(button);
 
   const content = document.createElement("div");
-  content.className = "json-content";
+  content.className = "details-content";
 
   const columns = document.createElement("div");
-  columns.className = "json-columns";
+  columns.className = "details-columns";
 
-  // Import JSON column
-  const importCol = document.createElement("div");
-  importCol.className = "json-column";
-  importCol.innerHTML = `
-    <h5>Imported Features</h5>
-    <pre>${escapeHtml(JSON.stringify(importedFeatures, null, 2))}</pre>
-  `;
-  columns.appendChild(importCol);
+  const addColumn = (title, text) => {
+    const column = document.createElement("div");
+    column.className = "details-column";
+    column.innerHTML = `<h5>${escapeHtml(title)}</h5><pre>${escapeHtml(text)}</pre>`;
+    columns.appendChild(column);
+  };
 
-  // Export JSON column
-  const exportCol = document.createElement("div");
-  exportCol.className = "json-column";
-  exportCol.innerHTML = `
-    <h5>Exported GeoJSON</h5>
-    <pre>${escapeHtml(JSON.stringify(exportedGeoJson, null, 2))}</pre>
-  `;
-  columns.appendChild(exportCol);
+  addColumn("Imported features", JSON.stringify(result.importedFeatures, null, 2));
+  Object.entries(result.exports).forEach(([format, exported]) => {
+    addColumn(`Exported ${format}`, exported.content);
+  });
 
   content.appendChild(columns);
   container.appendChild(content);
 
   button.addEventListener("click", () => {
     content.classList.toggle("visible");
-    button.textContent = content.classList.contains("visible") ? "Hide JSON" : "Show JSON";
+    button.textContent = content.classList.contains("visible") ? "Hide details" : "Show details";
   });
 
   return container;
@@ -346,6 +311,18 @@ function escapeHtml(text) {
 }
 
 /**
+ * One-line pass/fail count over every file of every suite.
+ *
+ * @param {Object[]} allResults - Array of all test suite results
+ * @returns {string} e.g. "Tests complete: 21/24 passed"
+ */
+function summarizeResults(allResults) {
+  const formatResults = allResults.flatMap((sr) => sr.formatResults);
+  const passed = formatResults.filter((fr) => fr.passed).length;
+  return `Tests complete: ${passed}/${formatResults.length} passed`;
+}
+
+/**
  * Formats all results as plain text for copying.
  *
  * @param {Object[]} allResults - Array of all test suite results
@@ -355,44 +332,37 @@ function formatResultsAsText(allResults) {
   let text = "AUTOMATED TEST RESULTS\n";
   text += "=".repeat(50) + "\n\n";
 
+  const appendIssues = (label, issues) => {
+    if (issues.length === 0) return;
+    text += `  ${label} issues:\n`;
+    issues.forEach((issue) => {
+      text += `    - ${issue}\n`;
+    });
+  };
+
   allResults.forEach((suiteResult) => {
     text += `TEST SUITE: ${suiteResult.config.name}\n`;
     text += "-".repeat(40) + "\n";
 
     suiteResult.formatResults.forEach((fr) => {
-      text += `${fr.passed ? "✓" : "✗"} ${fr.format}\n`;
+      text += `${fr.passed ? "✓" : "✗"} ${fr.format} (${fr.filename})\n`;
 
-      if (fr.importResult?.issues?.length > 0) {
-        text += "  Import issues:\n";
-        fr.importResult.issues.forEach((issue) => {
-          text += `    - ${issue}\n`;
-        });
+      if (fr.error) {
+        text += `  Error: ${fr.error}\n`;
+        return;
       }
-
-      if (fr.exportResult?.issues?.length > 0) {
-        text += "  Export issues:\n";
-        fr.exportResult.issues.forEach((issue) => {
-          text += `    - ${issue}\n`;
-        });
-      }
+      appendIssues("Import", fr.importValidation.issues);
+      Object.entries(fr.exports).forEach(([format, exported]) => {
+        appendIssues(`Export → ${format}`, exported.validation.issues);
+      });
     });
 
     const passed = suiteResult.formatResults.filter((r) => r.passed).length;
     text += `\nSuite total: ${passed}/${suiteResult.formatResults.length} passed\n\n`;
   });
 
-  // Overall summary
-  let totalPassed = 0;
-  let totalTests = 0;
-  allResults.forEach((sr) => {
-    sr.formatResults.forEach((fr) => {
-      totalTests++;
-      if (fr.passed) totalPassed++;
-    });
-  });
-
   text += "=".repeat(50) + "\n";
-  text += `TOTAL: ${totalPassed}/${totalTests} tests passed\n`;
+  text += `TOTAL: ${summarizeResults(allResults).replace("Tests complete: ", "")}\n`;
 
   return text;
 }
@@ -406,6 +376,7 @@ if (typeof window !== "undefined") {
     showError,
     clearError,
     updateStatus,
+    summarizeResults,
     formatResultsAsText,
   };
 }

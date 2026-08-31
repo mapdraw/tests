@@ -1,0 +1,72 @@
+{
+  "name": "Multi-Segment GPX Track",
+  "description": "A track with three segments explodes into three paths; waypoints without a color import in the default color",
+  "expectedFeatures": [
+    {
+      "name": "Multi-segment trail (Path)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.0, 45.0, 100],
+        [9.001, 45.001, 105],
+        [9.002, 45.002, 110]
+      ]
+    },
+    {
+      "name": "Multi-segment trail (Path 2)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.01, 45.01, 150],
+        [9.011, 45.011, 155],
+        [9.012, 45.012, 160]
+      ]
+    },
+    {
+      "name": "Multi-segment trail (Path 3)",
+      "type": "LineString",
+      "color": "#0066CC",
+      "description": "MultiLineString with 3 disconnected segments",
+      "coordinates": [
+        [9.02, 45.02, 200],
+        [9.021, 45.021, 205],
+        [9.022, 45.022, 210]
+      ]
+    },
+    {
+      "name": "Waypoint cluster (point 1)",
+      "type": "Point",
+      "color": "#DC143C",
+      "description": "MultiPoint with 3 related points (Red)",
+      "coordinates": [9.03, 45.03, 120]
+    },
+    {
+      "name": "Waypoint cluster (point 2)",
+      "type": "Point",
+      "color": "#DC143C",
+      "description": "MultiPoint with 3 related points (Red)",
+      "coordinates": [9.031, 45.031, 125]
+    },
+    {
+      "name": "Waypoint cluster (point 3)",
+      "type": "Point",
+      "color": "#DC143C",
+      "description": "MultiPoint with 3 related points (Red)",
+      "coordinates": [9.032, 45.032, 130]
+    },
+    {
+      "name": "Normal trail",
+      "type": "LineString",
+      "color": "#9B24B2",
+      "description": "Regular LineString for comparison",
+      "coordinates": [
+        [10.0, 46.0, 300],
+        [10.001, 46.001, 305],
+        [10.002, 46.002, 310]
+      ]
+    }
+  ],
+  "files": ["multigeometry-test.gpx"]
+}

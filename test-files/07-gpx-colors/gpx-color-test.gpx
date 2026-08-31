@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gpx version="1.1" creator="Color Test">
+
+  <!-- Waypoint with color (should be BLUE) -->
+  <wpt lat="52.52" lon="13.405">
+    <name>Blue Waypoint</name>
+    <color>#0000FF</color>
+  </wpt>
+
+  <!-- Route with color in AARRGGBB format (should be RED after stripping alpha) -->
+  <rte>
+    <name>Red Route (AARRGGBB)</name>
+    <extensions>
+      <color>FFFF0000</color>
+    </extensions>
+    <rtept lat="52.51" lon="13.38"/>
+    <rtept lat="52.52" lon="13.40"/>
+    <rtept lat="52.53" lon="13.42"/>
+  </rte>
+
+  <!-- Track with color in standard format (should be GREEN) -->
+  <trk>
+    <name>Green Track (standard)</name>
+    <extensions>
+      <color>#00FF00</color>
+    </extensions>
+    <trkseg>
+      <trkpt lat="52.50" lon="13.38"/>
+      <trkpt lat="52.51" lon="13.40"/>
+      <trkpt lat="52.52" lon="13.42"/>
+    </trkseg>
+  </trk>
+
+  <!-- Second track with AARRGGBB format (should be MAGENTA/PINK) -->
+  <trk>
+    <name>Magenta Track (AARRGGBB)</name>
+    <extensions>
+      <color>80FF00FF</color>
+    </extensions>
+    <trkseg>
+      <trkpt lat="52.49" lon="13.38"/>
+      <trkpt lat="52.50" lon="13.40"/>
+      <trkpt lat="52.51" lon="13.42"/>
+    </trkseg>
+  </trk>
+
+</gpx>

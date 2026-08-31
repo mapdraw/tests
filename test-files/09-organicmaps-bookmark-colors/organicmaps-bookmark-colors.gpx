@@ -1,0 +1,327 @@
+<?xml version="1.0"?>
+<gpx version="1.1" creator="Organic Maps" xmlns="http://www.topografix.com/GPX/1/1"
+    xmlns:gpxx="http://www.garmin.com/xmlschemas/GpxExtensions/v3"
+    xmlns:gpx_style="http://www.topografix.com/GPX/gpx_style/0/2"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.topografix.com/GPX/1/1 https://www.topografix.com/GPX/1/1/gpx.xsd http://www.topografix.com/GPX/gpx_style/0/2 https://www.topografix.com/GPX/gpx_style/0/2/gpx_style.xsd http://www.garmin.com/xmlschemas/GpxExtensions/v3 https://www.garmin.com/xmlschemas/GpxExtensionsv3.xsd">
+<metadata>
+  <name>organicmaps-bookmark-colors</name>
+</metadata>
+<wpt lat="47.439235" lon="8.085938">
+  <name>Red</name>
+</wpt>
+<wpt lat="47.387193" lon="8.552856">
+  <name>Pink</name>
+  <extensions>
+    <xsi:gpx><color>#FFFF4182</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="47.253136" lon="8.794556">
+  <name>Purple</name>
+  <extensions>
+    <xsi:gpx><color>#FF9B24B2</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="47.156105" lon="9.074707">
+  <name>DeepPurple</name>
+  <extensions>
+    <xsi:gpx><color>#FF6639BF</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.984" lon="8.794556">
+  <name>Blue</name>
+  <extensions>
+    <xsi:gpx><color>#FF0066CC</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.905246" lon="9.179077">
+  <name>LightBlue</name>
+  <extensions>
+    <xsi:gpx><color>#FF249CF2</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.845164" lon="9.684448">
+  <name>Cyan</name>
+  <extensions>
+    <xsi:gpx><color>#FF14BECD</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.694667" lon="9.030762">
+  <name>Teal</name>
+  <extensions>
+    <xsi:gpx><color>#FF00A58C</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.600393" lon="9.547119">
+  <name>Green</name>
+  <extensions>
+    <xsi:gpx><color>#FF3C8C3C</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.483265" lon="8.756104">
+  <name>Lime</name>
+  <extensions>
+    <xsi:gpx><color>#FF93BF39</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.346928" lon="9.18457">
+  <name>Yellow</name>
+  <extensions>
+    <xsi:gpx><color>#FFFFC800</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.21025" lon="8.964844">
+  <name>Orange</name>
+  <extensions>
+    <xsi:gpx><color>#FFFF9600</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="46.042736" lon="9.107666">
+  <name>DeepOrange</name>
+  <extensions>
+    <xsi:gpx><color>#FFF06432</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="45.970243" lon="8.668213">
+  <name>Brown</name>
+  <extensions>
+    <xsi:gpx><color>#FF804633</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="45.859412" lon="8.410034">
+  <name>Gray</name>
+  <extensions>
+    <xsi:gpx><color>#FF737373</color></xsi:gpx>
+  </extensions>
+</wpt>
+<wpt lat="45.667805" lon="8.580322">
+  <name>BlueGray</name>
+  <extensions>
+    <xsi:gpx><color>#FF597380</color></xsi:gpx>
+  </extensions>
+</wpt>
+<trk>
+  <name>Red</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>Red</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>E51B23</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FFE51B23</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.346267" lon="7.245483">
+    </trkpt>
+    <trkpt lat="47.446665" lon="7.915649">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Pink</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkMagenta</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>FF4182</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FFFF4182</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.253136" lon="7.174072">
+    </trkpt>
+    <trkpt lat="47.379754" lon="8.415527">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Purple</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkMagenta</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>9B24B2</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF9B24B2</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.208374" lon="7.185059">
+    </trkpt>
+    <trkpt lat="47.268048" lon="8.629761">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>DeepPurple</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkMagenta</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>6639BF</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF6639BF</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.133688" lon="7.097168">
+    </trkpt>
+    <trkpt lat="47.16731" lon="8.953857">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Blue</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkCyan</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>0066CC</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF0066CC</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.077604" lon="7.146606">
+    </trkpt>
+    <trkpt lat="47.058896" lon="8.607788">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>LightBlue</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>Cyan</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>249CF2</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF249CF2</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="47.025206" lon="6.987305">
+    </trkpt>
+    <trkpt lat="46.942762" lon="9.041748">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Cyan</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>Cyan</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>14BECD</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF14BECD</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.961511" lon="6.833496">
+    </trkpt>
+    <trkpt lat="46.856435" lon="9.558105">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Teal</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkCyan</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>00A58C</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF00A58C</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.890232" lon="6.833496">
+    </trkpt>
+    <trkpt lat="46.788777" lon="8.876953">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Green</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkGray</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>3C8C3C</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF3C8C3C</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.811339" lon="6.811523">
+    </trkpt>
+    <trkpt lat="46.645665" lon="9.360352">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Lime</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>93BF39</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF93BF39</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.754917" lon="6.811523">
+    </trkpt>
+    <trkpt lat="46.562637" lon="8.580322">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Yellow</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>Yellow</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>FFC800</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FFFFC800</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.694667" lon="6.800537">
+    </trkpt>
+    <trkpt lat="46.415139" lon="9.008789">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Orange</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>FF9600</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FFFF9600</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.619261" lon="6.860962">
+    </trkpt>
+    <trkpt lat="46.316584" lon="8.789063">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>DeepOrange</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkYellow</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>F06432</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FFF06432</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.536193" lon="6.882935">
+    </trkpt>
+    <trkpt lat="46.141783" lon="8.942871">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Brown</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkGray</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>804633</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF804633</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.464349" lon="6.877441">
+    </trkpt>
+    <trkpt lat="46.073231" lon="8.459473">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>Gray</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkGray</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>737373</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF737373</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.381044" lon="6.82251">
+    </trkpt>
+    <trkpt lat="45.958788" lon="8.234253">
+    </trkpt>
+  </trkseg>
+</trk>
+<trk>
+  <name>BlueGray</name>
+  <extensions>
+    <gpxx:TrackExtension><gpxx:DisplayColor>DarkGray</gpxx:DisplayColor></gpxx:TrackExtension>
+    <gpx_style:line><gpx_style:color>597380</gpx_style:color></gpx_style:line>
+    <xsi:gpx><color>#FF597380</color></xsi:gpx>
+  </extensions>
+  <trkseg>
+    <trkpt lat="46.305201" lon="6.767578">
+    </trkpt>
+    <trkpt lat="45.73686" lon="8.426514">
+    </trkpt>
+  </trkseg>
+</trk>
+</gpx>

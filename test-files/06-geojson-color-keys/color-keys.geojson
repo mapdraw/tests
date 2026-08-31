@@ -1,0 +1,215 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.404954,
+          52.520008
+        ]
+      },
+      "properties": {
+        "name": "Test Marker - Should be Crimson",
+        "color": "crimson"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            13.404954,
+            52.520008
+          ],
+          [
+            13.414954,
+            52.530008
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Test Path - Should be Gold",
+        "color": "gold"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          13.424954,
+          52.540008
+        ]
+      },
+      "properties": {
+        "name": "Test Marker - Should be Custom (not in palette)",
+        "color": "blue"
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marker with both keys (must be GREEN from marker-color, not red)",
+        "stroke": "#FF0000",
+        "marker-color": "#00FF00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.3,
+          46.9
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Path with both keys (must be RED from stroke, not green)",
+        "stroke": "#FF0000",
+        "marker-color": "#00FF00"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.2,
+            46.85
+          ],
+          [
+            8.35,
+            46.95
+          ],
+          [
+            8.5,
+            46.88
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Path with magenta color (not in palette)",
+        "stroke": "#FF00FF"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.553787,
+            47.426229
+          ],
+          [
+            7.589836,
+            47.433197
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marker with bright cyan (not in palette)",
+        "marker-color": "#00FFFF"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          7.577133,
+          47.362316
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Path with valid Blue from palette",
+        "stroke": "#0066CC"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.553444,
+            47.411594
+          ],
+          [
+            7.585373,
+            47.418564
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Path with lowercase hex",
+        "stroke": "#ac3939"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.2,
+            47.0
+          ],
+          [
+            8.3,
+            47.05
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marker with 3-digit hex",
+        "marker-color": "#F00"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.25,
+          47.1
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Path with AARRGGBB hex",
+        "stroke": "#80FF00FF"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            8.2,
+            47.1
+          ],
+          [
+            8.3,
+            47.15
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Marker with CSS name under marker-color",
+        "marker-color": "dodgerblue"
+      },
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.35,
+          47.1
+        ]
+      }
+    }
+  ]
+}

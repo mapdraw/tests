@@ -1,0 +1,67 @@
+{
+  "name": "KML Placemark Without Geometry",
+  "description": "Description-only placemarks sit between real ones; every marker must still get its own color from a shared Style, a StyleMap, an inline IconStyle or an icon URL, and MultiGeometry parts keep the placemark's color",
+  "expectedFeatures": [
+    {
+      "name": "Marker 1 - shared style - expect RED E51B23",
+      "type": "Point",
+      "color": "#E51B23",
+      "coordinates": [8.4, 47.4]
+    },
+    {
+      "name": "Marker 2 - StyleMap - expect GREEN 3C8C3C",
+      "type": "Point",
+      "color": "#3C8C3C",
+      "coordinates": [8.45, 47.4]
+    },
+    {
+      "name": "Marker 3 - inline IconStyle - expect BLUE 0066CC",
+      "type": "Point",
+      "color": "#0066CC",
+      "coordinates": [8.5, 47.4]
+    },
+    {
+      "name": "Marker 4 - icon url color - expect ORANGE FF9600",
+      "type": "Point",
+      "color": "#FF9600",
+      "coordinates": [8.55, 47.4]
+    },
+    {
+      "name": "Markers 5+6 - multi point - expect GREEN 3C8C3C (Marker)",
+      "type": "Point",
+      "color": "#3C8C3C",
+      "coordinates": [8.6, 47.4]
+    },
+    {
+      "name": "Markers 5+6 - multi point - expect GREEN 3C8C3C (Marker 2)",
+      "type": "Point",
+      "color": "#3C8C3C",
+      "coordinates": [8.65, 47.4]
+    },
+    {
+      "name": "Path 1 - LineStyle - expect PURPLE 9B24B2",
+      "type": "LineString",
+      "color": "#9B24B2",
+      "coordinates": [
+        [8.4, 47.35],
+        [8.65, 47.35]
+      ]
+    },
+    {
+      "name": "Path 2 + Marker 7 - mixed - expect CYAN 14BECD on both (Path)",
+      "type": "LineString",
+      "color": "#14BECD",
+      "coordinates": [
+        [8.4, 47.3],
+        [8.65, 47.3]
+      ]
+    },
+    {
+      "name": "Path 2 + Marker 7 - mixed - expect CYAN 14BECD on both (Marker)",
+      "type": "Point",
+      "color": "#14BECD",
+      "coordinates": [8.525, 47.28]
+    }
+  ],
+  "files": ["placemark-without-geometry.kml"]
+}

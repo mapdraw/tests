@@ -1,0 +1,269 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Multi-segment trail",
+        "description": "MultiLineString with 3 disconnected segments",
+        "stroke": "#0066CC"
+      },
+      "geometry": {
+        "type": "MultiLineString",
+        "coordinates": [
+          [
+            [
+              9.0,
+              45.0,
+              100
+            ],
+            [
+              9.001,
+              45.001,
+              105
+            ],
+            [
+              9.002,
+              45.002,
+              110
+            ]
+          ],
+          [
+            [
+              9.01,
+              45.01,
+              150
+            ],
+            [
+              9.011,
+              45.011,
+              155
+            ],
+            [
+              9.012,
+              45.012,
+              160
+            ]
+          ],
+          [
+            [
+              9.02,
+              45.02,
+              200
+            ],
+            [
+              9.021,
+              45.021,
+              205
+            ],
+            [
+              9.022,
+              45.022,
+              210
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Multi-part park",
+        "description": "MultiPolygon with 2 disconnected areas",
+        "stroke": "#3C8C3C"
+      },
+      "geometry": {
+        "type": "MultiPolygon",
+        "coordinates": [
+          [
+            [
+              [
+                9.05,
+                45.05,
+                50
+              ],
+              [
+                9.052,
+                45.05,
+                50
+              ],
+              [
+                9.052,
+                45.052,
+                55
+              ],
+              [
+                9.05,
+                45.052,
+                55
+              ],
+              [
+                9.05,
+                45.05,
+                50
+              ]
+            ]
+          ],
+          [
+            [
+              [
+                9.06,
+                45.06,
+                60
+              ],
+              [
+                9.062,
+                45.06,
+                60
+              ],
+              [
+                9.062,
+                45.062,
+                65
+              ],
+              [
+                9.06,
+                45.062,
+                65
+              ],
+              [
+                9.06,
+                45.06,
+                60
+              ]
+            ]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Waypoint cluster",
+        "description": "MultiPoint with 3 related points",
+        "marker-color": "#E51B23"
+      },
+      "geometry": {
+        "type": "MultiPoint",
+        "coordinates": [
+          [
+            9.03,
+            45.03,
+            120
+          ],
+          [
+            9.031,
+            45.031,
+            125
+          ],
+          [
+            9.032,
+            45.032,
+            130
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Mixed collection",
+        "description": "GeometryCollection with Point, LineString, and Polygon",
+        "stroke": "#FF8000"
+      },
+      "geometry": {
+        "type": "GeometryCollection",
+        "geometries": [
+          {
+            "type": "Point",
+            "coordinates": [
+              9.04,
+              45.04,
+              80
+            ]
+          },
+          {
+            "type": "LineString",
+            "coordinates": [
+              [
+                9.04,
+                45.04,
+                80
+              ],
+              [
+                9.041,
+                45.041,
+                85
+              ],
+              [
+                9.042,
+                45.042,
+                90
+              ]
+            ]
+          },
+          {
+            "type": "Polygon",
+            "coordinates": [
+              [
+                [
+                  9.043,
+                  45.043,
+                  95
+                ],
+                [
+                  9.045,
+                  45.043,
+                  95
+                ],
+                [
+                  9.045,
+                  45.045,
+                  100
+                ],
+                [
+                  9.043,
+                  45.045,
+                  100
+                ],
+                [
+                  9.043,
+                  45.043,
+                  95
+                ]
+              ]
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "name": "Normal trail",
+        "description": "Regular LineString for comparison",
+        "stroke": "#F020A0"
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            10.0,
+            46.0,
+            300
+          ],
+          [
+            10.001,
+            46.001,
+            305
+          ],
+          [
+            10.002,
+            46.002,
+            310
+          ]
+        ]
+      }
+    }
+  ]
+}

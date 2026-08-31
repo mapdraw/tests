@@ -1,0 +1,88 @@
+<?xml version="1.0" ?>
+<!-- Standard: KML 2.2 - https://developers.google.com/kml/documentation/kmlreference -->
+<kml xmlns="http://www.opengis.net/kml/2.2">
+  <Document>
+    <Placemark>
+      <name>Path with elevation</name>
+      <LineString>
+        <coordinates>7.553787,47.426229,420.5
+7.589836,47.433197,435.2
+7.604942,47.421351,428.8
+7.624855,47.432036,445.1
+7.654381,47.4253,438.6</coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Path without elevation</name>
+      <LineString>
+        <coordinates>7.553444,47.411594,0
+7.585373,47.418564,0
+7.606659,47.408574,0
+7.630005,47.416705,0
+7.654381,47.41322,0</coordinates>
+      </LineString>
+    </Placemark>
+    <Placemark>
+      <name>Polygon with elevation</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>7.55619,47.398117,410.3
+7.56649,47.379754,402.5
+7.602539,47.373245,398.1
+7.660561,47.381847,405.6
+7.669144,47.400905,422.4
+7.631035,47.402067,418.9
+7.609406,47.393004,408.2
+7.580223,47.404856,415.7
+7.55619,47.398117,410.3</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Polygon without elevation</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>7.707596,47.399976,0
+7.682533,47.400441,0
+7.6791,47.381847,0
+7.700043,47.372547,0
+7.717209,47.386031,0
+7.707596,47.399976,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+    <Placemark>
+      <name>Marker with elevation</name>
+      <Point>
+        <coordinates>7.577133,47.362316,395.8</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Marker without elevation</name>
+      <Point>
+        <coordinates>7.617645,47.358362</coordinates>
+      </Point>
+    </Placemark>
+    <Placemark>
+      <name>Polygon big overlapping</name>
+      <Polygon>
+        <outerBoundaryIs>
+          <LinearRing>
+            <coordinates>7.606659,47.435287,0
+7.604599,47.353478,0
+7.728195,47.367664,0
+7.722702,47.412756,0
+7.5737,47.460826,0
+7.522202,47.408574,0
+7.581596,47.350222,0
+7.606659,47.435287,0</coordinates>
+          </LinearRing>
+        </outerBoundaryIs>
+      </Polygon>
+    </Placemark>
+  </Document>
+</kml>

@@ -1,0 +1,98 @@
+{
+  "name": "GeoJSON Color Keys",
+  "description": "Colors given as CSS names, 3-, 6- and 8-digit hex, lowercase hex, under the non-standard color key, and under conflicting stroke/marker-color keys where the key matching the geometry must win",
+  "expectedFeatures": [
+    {
+      "name": "Test Marker - Should be Crimson",
+      "type": "Point",
+      "color": "#DC143C",
+      "coordinates": [13.404954, 52.520008]
+    },
+    {
+      "name": "Test Path - Should be Gold",
+      "type": "LineString",
+      "color": "#FFD700",
+      "coordinates": [
+        [13.404954, 52.520008],
+        [13.414954, 52.530008]
+      ]
+    },
+    {
+      "name": "Test Marker - Should be Custom (not in palette)",
+      "type": "Point",
+      "color": "#0000FF",
+      "coordinates": [13.424954, 52.540008]
+    },
+    {
+      "name": "Marker with both keys (must be GREEN from marker-color, not red)",
+      "type": "Point",
+      "color": "#00FF00",
+      "coordinates": [8.3, 46.9]
+    },
+    {
+      "name": "Path with both keys (must be RED from stroke, not green)",
+      "type": "LineString",
+      "color": "#FF0000",
+      "coordinates": [
+        [8.2, 46.85],
+        [8.35, 46.95],
+        [8.5, 46.88]
+      ]
+    },
+    {
+      "name": "Path with magenta color (not in palette)",
+      "type": "LineString",
+      "color": "#FF00FF",
+      "coordinates": [
+        [7.553787, 47.426229],
+        [7.589836, 47.433197]
+      ]
+    },
+    {
+      "name": "Marker with bright cyan (not in palette)",
+      "type": "Point",
+      "color": "#00FFFF",
+      "coordinates": [7.577133, 47.362316]
+    },
+    {
+      "name": "Path with valid Blue from palette",
+      "type": "LineString",
+      "color": "#0066CC",
+      "coordinates": [
+        [7.553444, 47.411594],
+        [7.585373, 47.418564]
+      ]
+    },
+    {
+      "name": "Path with lowercase hex",
+      "type": "LineString",
+      "color": "#AC3939",
+      "coordinates": [
+        [8.2, 47.0],
+        [8.3, 47.05]
+      ]
+    },
+    {
+      "name": "Marker with 3-digit hex",
+      "type": "Point",
+      "color": "#FF0000",
+      "coordinates": [8.25, 47.1]
+    },
+    {
+      "name": "Path with AARRGGBB hex",
+      "type": "LineString",
+      "color": "#FF00FF",
+      "coordinates": [
+        [8.2, 47.1],
+        [8.3, 47.15]
+      ]
+    },
+    {
+      "name": "Marker with CSS name under marker-color",
+      "type": "Point",
+      "color": "#1E90FF",
+      "coordinates": [8.35, 47.1]
+    }
+  ],
+  "files": ["color-keys.geojson"]
+}

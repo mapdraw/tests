@@ -1,0 +1,549 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.085938,
+          47.439235
+        ]
+      },
+      "properties": {
+        "name": "Red",
+        "marker-color": "red"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.552856,
+          47.387193
+        ]
+      },
+      "properties": {
+        "name": "Pink",
+        "marker-color": "#FF4182"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.794556,
+          47.253136
+        ]
+      },
+      "properties": {
+        "name": "Purple",
+        "marker-color": "#9B24B2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.074707,
+          47.156105
+        ]
+      },
+      "properties": {
+        "name": "DeepPurple",
+        "marker-color": "#6639BF"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.794556,
+          46.984
+        ]
+      },
+      "properties": {
+        "name": "Blue",
+        "marker-color": "#0066CC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.179077,
+          46.905246
+        ]
+      },
+      "properties": {
+        "name": "LightBlue",
+        "marker-color": "#249CF2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.684448,
+          46.845164
+        ]
+      },
+      "properties": {
+        "name": "Cyan",
+        "marker-color": "#14BECD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.030762,
+          46.694667
+        ]
+      },
+      "properties": {
+        "name": "Teal",
+        "marker-color": "#00A58C"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.547119,
+          46.600393
+        ]
+      },
+      "properties": {
+        "name": "Green",
+        "marker-color": "#3C8C3C"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.756104,
+          46.483265
+        ]
+      },
+      "properties": {
+        "name": "Lime",
+        "marker-color": "#93BF39"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.18457,
+          46.346928
+        ]
+      },
+      "properties": {
+        "name": "Yellow",
+        "marker-color": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.964844,
+          46.21025
+        ]
+      },
+      "properties": {
+        "name": "Orange",
+        "marker-color": "#FF9600"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          9.107666,
+          46.042736
+        ]
+      },
+      "properties": {
+        "name": "DeepOrange",
+        "marker-color": "#F06432"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.668213,
+          45.970243
+        ]
+      },
+      "properties": {
+        "name": "Brown",
+        "marker-color": "#804633"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.410034,
+          45.859412
+        ]
+      },
+      "properties": {
+        "name": "Gray",
+        "marker-color": "#737373"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          8.580322,
+          45.667805
+        ]
+      },
+      "properties": {
+        "name": "BlueGray",
+        "marker-color": "#597380"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.245483,
+            47.346267
+          ],
+          [
+            7.915649,
+            47.446665
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Red",
+        "stroke": "#E51B23"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.174072,
+            47.253136
+          ],
+          [
+            8.415527,
+            47.379754
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Pink",
+        "stroke": "#FF4182"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.185059,
+            47.208374
+          ],
+          [
+            8.629761,
+            47.268048
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Purple",
+        "stroke": "#9B24B2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.097168,
+            47.133688
+          ],
+          [
+            8.953857,
+            47.16731
+          ]
+        ]
+      },
+      "properties": {
+        "name": "DeepPurple",
+        "stroke": "#6639BF"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            7.146606,
+            47.077604
+          ],
+          [
+            8.607788,
+            47.058896
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Blue",
+        "stroke": "#0066CC"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.987305,
+            47.025206
+          ],
+          [
+            9.041748,
+            46.942762
+          ]
+        ]
+      },
+      "properties": {
+        "name": "LightBlue",
+        "stroke": "#249CF2"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.833496,
+            46.961511
+          ],
+          [
+            9.558105,
+            46.856435
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Cyan",
+        "stroke": "#14BECD"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.833496,
+            46.890232
+          ],
+          [
+            8.876953,
+            46.788777
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Teal",
+        "stroke": "#00A58C"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.811523,
+            46.811339
+          ],
+          [
+            9.360352,
+            46.645665
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Green",
+        "stroke": "#3C8C3C"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.811523,
+            46.754917
+          ],
+          [
+            8.580322,
+            46.562637
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Lime",
+        "stroke": "#93BF39"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.800537,
+            46.694667
+          ],
+          [
+            9.008789,
+            46.415139
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Yellow",
+        "stroke": "#FFC800"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.860962,
+            46.619261
+          ],
+          [
+            8.789063,
+            46.316584
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Orange",
+        "stroke": "#FF9600"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.882935,
+            46.536193
+          ],
+          [
+            8.942871,
+            46.141783
+          ]
+        ]
+      },
+      "properties": {
+        "name": "DeepOrange",
+        "stroke": "#F06432"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.877441,
+            46.464349
+          ],
+          [
+            8.459473,
+            46.073231
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Brown",
+        "stroke": "#804633"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.82251,
+            46.381044
+          ],
+          [
+            8.234253,
+            45.958788
+          ]
+        ]
+      },
+      "properties": {
+        "name": "Gray",
+        "stroke": "#737373"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            6.767578,
+            46.305201
+          ],
+          [
+            8.426514,
+            45.73686
+          ]
+        ]
+      },
+      "properties": {
+        "name": "BlueGray",
+        "stroke": "#597380"
+      }
+    }
+  ]
+}
